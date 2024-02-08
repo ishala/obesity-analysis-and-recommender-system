@@ -297,10 +297,13 @@ Pada proses ini, terdapat beberapa langkah yang dilakukan. Tujuannya adalah memu
    
    Setelah itu dilakukan pengecekan dengan menggunakan box plot lanjut
    - Kolom Height
+
       ![Hasil Height 2](assets/height2.png)
    - Kolom Weight
+      
       ![Hasil Weight 2](assets/weight2.png)
    - Kolom BMI
+      
       ![Hasil BMI 2](assets/BMI2.png)
    
    Dari hasil penghapusan outlier sebelumnya, ternyata masih terdapat data outlier di dalam kolom **Height**. Dan juga, dapat terlihat bahwa nilai outlier merupakan nilai maksimal. 
@@ -381,6 +384,7 @@ Pada proses ini, terdapat beberapa langkah yang dilakukan. Tujuannya adalah memu
    1. Kolom Kategorikal
       Pada kolom kategorikal, plotting dilakukan pada satu kolom ke kolom target.
       1. Kolom CAEC
+            
             ![Hasil CAEC](assets/multi-CAEC.png)
 
             - Rata-rata BMI bervariasi, dengan frekuensi memakan cemilan kategori "sometimes" memiliki rata-rata tertinggi
@@ -388,6 +392,7 @@ Pada proses ini, terdapat beberapa langkah yang dilakukan. Tujuannya adalah memu
             - Dapat diasumsikan bahwa fitur CAEC memiliki pengaruh relatif rendah terhadap fitur BMI
 
       2. Kolom NObeyesdad
+            
             ![Hasil CAEC](assets/multi-NObeyesdad.png)
 
             - Rata-rata BMI bervariasi, dengan kategori "obesity_type_iii" memiliki rata-rata tertinggi
@@ -398,14 +403,117 @@ Pada proses ini, terdapat beberapa langkah yang dilakukan. Tujuannya adalah memu
       Pada kolom numerik akan dilakukan beberapa langkah plotting dengan memasukkan semua kolom numerikal secara bersamaan. Hal ini berbeda dengan kolom kategorikal yang dilakukan antar dua kolom.
 
       1. Plotting Pair Plot
+            
             ![Hasil Pair Plot](assets/multi-numerical-pairplot.png)
 
             - Terdapat korelasi positif kuat antara kolom **Weight** dan **BMI** ditandai dengan pola semu menjulang ke atas secara linear. Hal ini sesuai dengan topik data yang digunakan, yaitu representasi keadaan berat badan dengan *Body Mass Index* (BMI) terhadap indikasi obesitas
             - Kolom Height tidak berkorelasi dengan kolom BMI
       2. Plotting Heatmap
+            
             ![Hasil Heat Map](assets/multi-numerical-heatmap.png)
 
             Dari hasil di atas, terlihat bahwa kolom **Weight** memiliki relasi positif kuat dengan kolom **BMI** dengan nilai korelasi mendekati positif (+) 1.
 
             Hal ini sesuai dengan topik data dan tujuan analisi yaitu obesitas yang berkaitan erat dengan berat badan.
+
+E. Data Preparation
+
+Pada tahap ini, data yang ada akan diolah sedemikian rupa agar bekerja dengan baik dengan model yang akan dibuat. Fokus pada proses ini adalah mengubah setiap fitur agar dapat menyesuaikan model dengan hasil yang diharapkan. Berikut adalah detailnya:
+
+  1. *Encoding* Fitur Kategorikal
+      
+      Pada fitur kategorikal dengan tipe data objek, tidak dapat diproses oleh model yang memerlukan nilai numerik. Maka dari itu, perlu dilakukan proses *Encoding*.
+
+      Proses ini dilakukan dengan menggunakan *One Hot Method*.
+
+      ```py
+      cleanedObesDf = pd.concat([cleanedObesDf, pd.get_dummies(cleanedObesDf['CAEC'], prefix='calories')], axis=1)
+
+      cleanedObesDf = pd.concat([cleanedObesDf, pd.get_dummies(cleanedObesDf['NObeyesdad'], prefix='obesity')], axis=1)
+      ```
+
+      Perintah di atas akan mengubah fitur *CAEC* dan *NObeyesdad* menjadi angka 0 atau 1 pada setiap data unique-nya.
+
+      Setelah itu, dapat menghapus kolom asli dengan kode:
+
+      ```py
+      cleanedObesDf.drop(['CAEC', 'NObeyesdad'], axis=1, inplace=True)
+      ``` 
+
+      Dengan begitu, ukuran data menjadi tidak terlalu besar. Setelah itu, ternyata data yang tercipta adalah data dengan tipe data boolean. Maka perlu diubah dengan membuat fungsi dan menerapkannya pada setiap data yang ada. Berikut kodenya:
+
+      ```py
+      def toInt(value):
+      if type(value) == bool:
+        if value == True:
+            return 1
+        else:
+            return 0
+      else:
+        return value
+      ```
+
+      Dengan begitu, sekarang nilainya sudah menjadi 0 dan 1 bertipe data integer.
+
+  2. Peninjauan Dimensi Data dengan PCA
+     
+     Proses ini ditujukan untuk mengurangi dimensi data agar lebih terkonvergensi. Dengan begitu model yang dibuat akan bekerja lebih optimal dan cepat. Namun, sebelumnya harus dilakukan pengecekan korelasi pada fitur-fitur yang akan digunakan sebagai acuan prediksi. Berikut hasilnya:
+
+     ![Hasil PCA](assets/pca.png)
+
+     Dari hasil di atas, ternyata kolom-kolom fitur yaitu Height dan Weight **tidak memiliki korelasi**. Maka tidak akan dilakukan reduksi dimensi agar tidak terjadi kehilangan data yang merusak struktur dataset.
+
+  3. Train Test Split
    
+     Proses ini akan membagi dataset menjadi dua, yaitu Fitur X dan Y. Fitur X akan menjadi acuan prediksi, sedangkan Fitur Y akan menjadi bahan belajar mesin dalam mempelajari fitur X. Berikut Kodenya:
+
+     - Fitur X
+
+      ```py
+      X = cleanedObesDf.drop(['BMI'], axis=1)
+      ```
+
+     - Fitur Y
+      
+      ```py
+      y = cleanedObesDf['BMI']
+      ```
+
+     - Pembagian Train dan Test 
+
+      ```py
+      X_train, X_test, y_train, y_test = train_test_split(X, y, test_size= 0.1, random_state=42)
+      ```
+
+      Pada pembagian train dan test, disini hanya mengambil **10%** yaitu sebanyak **211** data dari keseluruhan data X sebanyak **2108** data untuk menjadi data test, dengan pengambilan random state pada state **42** dengan tujuan agar data yang diambil konsisten.
+
+  4. Standarisasi Fitur X
+     
+     Pada proses ini, bertujuan untuk mengubah fitur X asli menjadi nilai-nilai baru dengan skala yang relatif sama atau mendekati distribusi normal. Standarisasi hanya dilakukan pada fitur X untuk menghindari kebocoran data.
+
+     Standarisasi menggunakan fungsi **StandarScaler** dari library Scikit-learn. Berikut kodenya
+
+     ```py
+      # Mendefinisikan StandarScaler untuk standarisasi
+      scaler = StandardScaler()
+
+      scaler.fit(X_train[numericalFeatures])
+
+      # Melakukan transformasi pada data
+      X_train[numericalFeatures] = scaler.transform(X_train.loc[:, numericalFeatures])
+     ```
+
+     Dari hasil kode di atas, maka sekarang distribusi data menjadi lebih tereduksi. Berikut adalah hasil pencarian deksripsi statistik pada fitur X:
+
+     |  | Height | Weight
+     |:-:|:-:|:-:|
+     | count | 1897.0000 | 1897.0000 |
+     | mean | 0.0000 | 0.0000 |
+     | std | 1.0003 | 1.0003 |
+     | min | -2.7149 | -1.8140 |
+     | 25% | -0.7728 | -0.8206 |
+     | 50% | -0.0108 | -0.1329 |
+     | 75% | 0.7114 | 0.8223 |
+     | max | 2.6517 | 3.0001 |
+
+     Dapat dilihat bahwa saat ini rata-rata (mean) dan standar deviasi (std) sudah sama dari kedua kolom yang dilakukan standarisasi. Maka dapat dilanjutkan untuk proses modelling.
