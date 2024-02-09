@@ -705,3 +705,7 @@ Selanjutnya adalah implementasi pada fitur X_test. Berikut adalah tahapan-tahapa
       | 1204 | 28.969812 | 28.9 | 27.4 |
 
       Ternyata, sudah jelas bahwa algoritma **K-Nearest Neighbors** lebih unggul daripada algoritma **Random Forest** dalam hal memprediksi nilai **BMI** dari bahan ajar nilai **Berat Badan (Weight)** dan **Tinggi Badan (Height)** dengan selisih nilai asli dan nilai prediksi yang sedikit.
+
+      Note:
+
+      Jika membutuhkan data assets berupa gambar visualisasi data, tekan [tulisan ini](https://drive.google.com/drive/folders/1BfC2oPBtgQg049I64Q1BAPjCuqi-IKlm?usp=sharing). Karena pengerjaan menggunakan lokal **Jupyter Notebook**
