@@ -610,4 +610,98 @@ Pada tahap ini, data yang ada akan diolah sedemikian rupa agar bekerja dengan ba
       |:-:|:-:|
       | 0.148428 | 1.298258 |
 
-      Dari hasil di atas, dapat disimpulkan bahwa **K-Nearest Neighbors** akan dipilih menjadi algoritma solusi, dengan perolehan error terkecil, yaitu **0.148428**. Selain itu, juga algoritma ini ternyata dapat berjalan dengan baik pada data *training* yang digunakan saat ini yang berukuran relatif kecil.
+      Dari hasil di atas, dapat disimpulkan sementara bahwa **K-Nearest Neighbors** akan dipilih menjadi algoritma solusi, dengan perolehan error terkecil, yaitu **0.148428**. Selain itu, juga algoritma ini ternyata dapat berjalan dengan baik pada data *training* yang digunakan saat ini yang berukuran relatif kecil.
+
+## F. Evaluation
+
+Walaupun sudah terlihat bahwa KNN lebih baik daripada Random Forest, tetapi hal itu masih diambil dari hasil perolehan prediksi **data training** dan perlu untuk melakukan prediksi pada **data testing**. Sebab, pada dasarnya nanti model akan memprediksi data asli, tidak pada data training. Maka diperlukan proses prediksi lagi pada data testing dengan kedua algoritma tersebut.
+
+Pada proses analisis saat ini, prediksi yang dilakukan adalah menggunakan metode regresi, maka metrik yang cocok untuk diujikan adalah *Mean Squared Error* (MSE). 
+
+Metrik ini bekerja dengan menghitung seberapa jauh perbedaan antara nilai sebenarnya dengan nilai hasil prediksi. Semakin jauh perbedaannya, maka semakin tidak akurat. Jauh dan tidaknya dilihat dari hasil *error* yang didapatkan. Berikut adalah formulanya:
+
+MSE = $\frac{1}{n} \sum_{i=1}^{n} (\text{y}_i - \text{y}\_\text{pred}_{i})^2$
+
+Dengan penjelasan sebagai berikut:
+
+- ${n}$ adalah jumlah observasi dalam dataset
+- $\text{y}_i$ adalah nilai sebenarnya ke-${i}$
+- $\text{y}\_\text{pred}_{i}$ adalah nilai hasil prediksi ke-${i}$
+
+Selanjutnya adalah implementasi pada fitur X_test. Berikut adalah tahapan-tahapannya:
+
+  1. Scaling dengan Standarisasi pada Fitur X_test
+   
+     Proses scaling pada fitur **X_test** dilakukan agar data pada fitur tersebut dapat terkonvergensi dengan baik ketika akan dimasukkan ke dalam model. 
+     
+     Langkahnya kurang lebih sama ketika melakukan scaling pada fitur **X_train** pada langkah sebelumnya. Hanya pemilihan fitur saja yang berbeda.
+
+     ```py
+     X_test.loc[:, numericalFeatures] = scaler.transform(X_test[numericalFeatures])
+     ```
+
+     Mirip dengan hasil standarisasi pada fitur **X_train**, sekarang nilainya tidak terlalu besar untuk dimasukkan ke dalam model.
+
+  2. Evaluasi Metrik
+      Seperti pada pernyataan di awal, penentu algoritma yang baik adalah ketika dilakukan uji metrik di **data testing**, sebagai representasi data baru. Data dapat dikatakan **baru** dikarenakan tidak ada pada hasil pembelajaran di **data training**. Maka dapat dilakukan evaluasi metrik pada kedua algoritma ini.
+
+      - Evaluasi KNN
+         ```py
+         trainModels.loc['testMSE', 'KNN'] = mean_squared_error(y_pred=knnModel.predict(X_test), y_true=y_test)
+         ```
+
+      - Evaluasi Random Forest
+         ```py
+         trainModels.loc['testMSE', 'RandomForest'] = mean_squared_error(y_pred=rfModel.predict(X_test), y_true=y_test)
+         ```
+
+      Setelah dilakukan prediksi menggunakan kedua algoritma tersebut pada data testing, selanjutnya dapat ditampilkan hasil dari keduanya. Hasilnya adalah:
+
+      **Hasil tabel**
+
+      | | KNN | Random Forest|
+      |:-|:-:|:-:|
+      | trainMSE | 0.148428 | 1.298258 |
+      | testMSE | 0.413398 | 1.384255 |
+
+      **Visualisasi Error**
+      ![Hasil Komparasi](assets/compare-error.png)
+      Dari tabel hasil di atas, dapat disimpulkan bahwa ternyata saat dilakukan evaluasi metrik pada KNN dan Random Forest menggunakan MSE, hasil uji data testing pada **KNN** lebih kecil daripada **Random Forest** dari segi nilai *error*-nya. 
+      
+
+      Untuk sementara dapat dikatakan bahwa **KNN lebih baik** performanya dibandingkan dengan Random Forest. Selanjutnya dapat dilakukan evaluasi hasil prediksi.
+
+  3. Evaluasi Prediksi
+
+      Untuk memastikan algoritma mana yang cocok adalah mencoba membandingkan data asli dengan data hasil prediksi. Semakin mirip, maka algoritma itu baik performanya dalam memprediksi.
+
+      Yang perlu dilakukan adalah mengumpulkan sample yang akan diuji, dengan langkah-langkah sebagai berikut:
+
+      **Pengambilan Sample**
+      ```py
+      # Ambil Nilai X dari X_test
+      XForPredict = X_test[:3].copy()
+      # Ambil Nilai y asli dari y_test
+      yForPredict = {'y_true':y_test[:3]}
+      ```
+
+      Sample data di ambil dari 3 data teratas dari data testing x, begitu juga data harapan nilai asli diambil dari 3 data teratas dari data testing y.
+
+      Setelah sample data didapatkan, maka dapat langsung saja dilakukan prediksi untuk melihat seberapa baik kedua algoritma tersebut memprediksi.
+
+      **Pengujian Prediksi**
+      ```py
+      for name, model in modelDict.items():
+         yForPredict['prediksi_'+name] = model.predict(XForPredict).round(1)
+
+      pd.DataFrame(yForPredict)
+      ```
+
+      Hasilnya adalah:
+      | | y_true | prediksi_KNN | prediksi_RF|
+      |:-:|:-:|:-:|:-:|
+      | 1446 | 31.896722 | 31.9 | 32.8 |
+      | 2077 | 46.027679 | 46.5 | 47.5 |
+      | 1204 | 28.969812 | 28.9 | 27.4 |
+
+      Ternyata, sudah jelas bahwa algoritma **K-Nearest Neighbors** lebih unggul daripada algoritma **Random Forest** dalam hal memprediksi nilai **BMI** dari bahan ajar nilai **Berat Badan (Weight)** dan **Tinggi Badan (Height)** dengan selisih nilai asli dan nilai prediksi yang sedikit.
