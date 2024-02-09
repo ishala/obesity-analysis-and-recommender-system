@@ -10,7 +10,7 @@ Obesitas merupakan suatu kondisi medis yang ditandai oleh penimbunan lemak tubuh
 Menurut data Organisasi Kesehatan Dunia (WHO), obesitas telah mencapai tingkat epidemiologi, dengan lebih dari 650 juta orang dewasa di seluruh dunia dinyatakan obesitas pada tahun 2016. Hal ini menunjukkan bahwa obesitas bukan lagi hanya masalah kesehatan individu, tetapi juga menjadi beban kesehatan masyarakat yang signifikan. Obesitas dapat timbul disebabkan oleh beberapa hal sebagai berikut:
 
 1. Kurangnya aktifitas fisik baik kegiatan harian maupun latihan fisik terstruktur
-2. keturunan genetika
+2. Keturunan genetika
 3. Faktor lingkungan
 
 ### 2. Sebab Akibat Masalah
@@ -21,9 +21,9 @@ Maka dari itu, perlu melakukan berbagai strategi untuk mengurangi resiko masyara
 Disini saya berinisiatif untuk melakukan analisis lebih lanjut mengenai data masyarakat beserta label yang menunjukkan apakah sedang mengalami obesitas atau tidak. Serta memberikan informasi pada kondisi ciri-ciri tubuh agar lebih berhati-hati dalam melakukan kebiasaan hidup.
 
 ### 3. Referensi
-   1. [Referensi Pertama](https://d1wqtxts1xzle7.cloudfront.net/39625453/jurnal-libre.pdf?1446519911=&response-content-disposition=inline%3B+filename%3DFAKTOR_RISIKO_OBESITAS_PADA_ANAK_5_15_TA.pdf&Expires=1706423938&Signature=CfseHwMvVXjfNg90XPlccC~RocUVem5IncpL82cJPnYcPEL9rRJgkjy3eA5AFzVMKtvSfxJfO~WGhARcxrvmn3MGkw6Eslf5UwFnNZFL5zqd7UamxeWU0mZ2qS0SAH~kcO7cF4DDHQQADyGNDPTLRRlxdL0-cpA35~ZzhmjrPqxNmbFkCKNKFz4YCsUBc4v~Hffnyl2ZjMkcR1MkJ~XBr8kJKCnQS~OaFeWkjetvIkn4FR-OBOJEXffkgmohYc~-09NT0WjluDqHP3Dx-Dt1-bhGIqowCqQEUGgfl6pvdA6O2BK-ZiNJvI~sDgZVKukUQdQpFvJgz7PDPFqNHVEQ9w__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA)
-   2. [Referensi Kedua](https://pgm.persagi.org/index.php/pgm/article/view/47)
-   3. [Referensi Ketiga](https://journals.telkomuniversity.ac.id/jett/article/download/1395/1005/)
+   1. [FAKTOR RISIKO OBESITAS PADA ANAK 5-15](https://d1wqtxts1xzle7.cloudfront.net/39625453/jurnal-libre.pdf?1446519911=&response-content-disposition=inline%3B+filename%3DFAKTOR_RISIKO_OBESITAS_PADA_ANAK_5_15_TA.pdf&Expires=1706423938&Signature=CfseHwMvVXjfNg90XPlccC~RocUVem5IncpL82cJPnYcPEL9rRJgkjy3eA5AFzVMKtvSfxJfO~WGhARcxrvmn3MGkw6Eslf5UwFnNZFL5zqd7UamxeWU0mZ2qS0SAH~kcO7cF4DDHQQADyGNDPTLRRlxdL0-cpA35~ZzhmjrPqxNmbFkCKNKFz4YCsUBc4v~Hffnyl2ZjMkcR1MkJ~XBr8kJKCnQS~OaFeWkjetvIkn4FR-OBOJEXffkgmohYc~-09NT0WjluDqHP3Dx-Dt1-bhGIqowCqQEUGgfl6pvdA6O2BK-ZiNJvI~sDgZVKukUQdQpFvJgz7PDPFqNHVEQ9w__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA)
+   2. [FAKTOR RISIKO OBESITAS SENTRAL PADA ORANG DEWASA UMUR 25-65 TAHUN DI INDONESIA (ANALISIS DATA RISET KESEHATAN DASAR 2013)](https://pgm.persagi.org/index.php/pgm/article/view/47)
+   3. [ANALISIS KALKULASI BODY MASS INDEX DENGAN PENGOLAHAN CITRA DIGITAL BERBASIS APLIKASI ANDROID](https://journals.telkomuniversity.ac.id/jett/article/download/1395/1005/)
    
 
 ## B. Business Understanding
@@ -43,8 +43,8 @@ Pada proses analisis ini, saya berfokus untuk mengambil permasalahan-permasalaha
 
 ### 3. Solution Statements
 1. Membuat analisis data dengan visualisasi data yang menggambarkan kondisi data untuk prediksi pada tahap modelling.
-2. Membuat model regresi pada data obesitas menggunakan **Random Forest** dengan kolom BMI sebagai target.
-3. Melakukan hyperparameter tuning pada *n_estimator*, *random_state*, *n_jobs*, dan *max_depth* untuk mengoptimalisasi kinerja model. 
+2. Membuat model regresi pada data obesitas menggunakan **K-Nearest Neighbors dan Random Forest** dengan kolom BMI sebagai target.
+3. Melakukan perbandingan dari kedua model tersebut dengan cara mengevaluasi hasil metrik evaluasi.
 4. Menggunakan metrik evaluasi *Mean Squared Root* (MSE)
 
 ## C. Data Understanding
@@ -416,7 +416,7 @@ Pada proses ini, terdapat beberapa langkah yang dilakukan. Tujuannya adalah memu
 
             Hal ini sesuai dengan topik data dan tujuan analisi yaitu obesitas yang berkaitan erat dengan berat badan.
 
-E. Data Preparation
+## D. Data Preparation
 
 Pada tahap ini, data yang ada akan diolah sedemikian rupa agar bekerja dengan baik dengan model yang akan dibuat. Fokus pada proses ini adalah mengubah setiap fitur agar dapat menyesuaikan model dengan hasil yang diharapkan. Berikut adalah detailnya:
 
@@ -517,3 +517,97 @@ Pada tahap ini, data yang ada akan diolah sedemikian rupa agar bekerja dengan ba
      | max | 2.6517 | 3.0001 |
 
      Dapat dilihat bahwa saat ini rata-rata (mean) dan standar deviasi (std) sudah sama dari kedua kolom yang dilakukan standarisasi. Maka dapat dilanjutkan untuk proses modelling.
+
+## E. Modeling
+
+   Pada proses ini, fokusnya adalah membuat model yang akan melakukan prediksi dari **fitur X** sebagai bahan prediksi dan **fitur y** sebagai acuan belajar pola hasilnya. Jenis algoritma-algoritma yang digunakan adalah **K-Nearest Neighbors dan Random Forest**. Berikut adalah detailnya:
+   
+   1. K-Nearest Neighbors
+      
+      K-Nearest Neighbors atau biasa disebut KNN adalah sebuah algoritma yang pada proses prediksinya adalah melakukan pemetaan data prediksi secara acak, lalu akan diambil data dengan jarak terdekat. 
+      
+      **a. Kelebihan**
+      
+      - Mudah dipahami dan diimplementasikan, dengan konsep perhitungan jarak antara titik data untuk menentukan tetangga terdekat
+      - Tidak diperlukan pembelajaran atau proses *training* ketika membuat model
+      - Dapat menangani data non linear dengan dimensi data yang tinggi.
+
+      **b. Kekurangan**
+
+      - Tenaga komputasi yang dihasilkan tinggi, apalagi pada data dengan tingkat dimensi tinggi
+      - Sangat sensitif pada data *outliers*, sebab algoritma ini mengedepankan ukuran jarak antar data.
+      - Prestasi menurun pada keberlanjutan dimensi, sebab dengan dimensi yang terus meningkat akan menunrunkan makna dari jarak data.
+
+      Lalu, implementasi data pada model adalah sebagai berikut:
+
+      **Pendefinisian Model ke Variabel**
+      ```py
+      knnModel = KNeighborsRegressor(n_neighbors=5)
+      ```
+      Perintah di atas adalah untuk merepresentasikan library model ke sebuah variabel agar dapat digunakan setelah melakukan import library **KNeighborsRegressor**. Lalu, terdapat penggunaan parameter disini, yaitu *n_neighbors*. Parameter ini akan memberikan batasan tetangga yang akan dicek dengan batas **5** tetangga terdekat.
+
+      **Fit Data ke Model**
+      ```py
+      knnModel.fit(X_train, y_train)
+      ```
+      Perintah di atas bertujuan untuk menyesuaikan model dengan fitur-fitur yang sudah disiapkan yaitu **fitur X** dan **fitur y**.
+
+      **Merangkum Hasil**
+      ```py
+      trainModels.loc['trainMSE', 'KNN'] = mean_squared_error(y_pred= knnModel.predict(X_train), y_true=y_train)
+      ```
+      Perintah di atas bertujuan untuk memasukkan hasil prediksi dengan metrik ***Mean Squared Error* (MSE)** yang akan dijelaskan lebih lanjut pada bab evaluasi. Terdapat proses-proses yang terjadi yaitu melakukan prediksi pada fitur *X_train* dengan membandingkan nilai asli **y_train** sebagai bahan acuan. 
+
+   2. Random Forest
+
+      Random Forest adalah algoritma *ensemble* dengan metode *bagging* yang isinya terdapat banyak algoritma yang berjalan secara independen. Dari hasil keseluruhan algoritma, akan dipilih yang memiliki peforma terbaik. Jadi, algoritma Random Forest adalah algoritma yang tersusun dari banyak algoritma pohon (decision tree) dengan pembagian fitur secara acak.
+
+      **a. Kelebihan**
+      - Memiliki stabilitas terhadap overfitting, sebab pada prosesnya membangun banyak pohon keputusan yang berbeda lalu digabungkan
+      - Tidak sensitif pada outliers, sebab hasil prediksi didasarkan pada mayoritas keputusan pohon
+      - Dapat menangani campuran tipe data tanpa memerlukan banyak *preprocessing data*.
+      
+      **b. Kekurangan**
+      - Tidak selalu interpretatif, sulit untuk diintepretasi secara intuitif terutama jika terdapat banyak *decision tree* yang ada di dalam *ensemble*.
+      - Rentan pada kesalahan, jika data yang digunakan tidak seimbang
+      - Tidak efektif pada data tabular yang linear dengan hubungan linear yang kuat 
+
+      Lalu, implementasi data pada model adalah sebagai berikut:
+
+      **Pendefinisian Model ke Variabel**
+      ```py
+      rfModel = RandomForestRegressor(n_estimators=10, max_depth=4, random_state=25, n_jobs=-1)
+      ```
+
+      Pada proses pendefinisian model pada variabel, terdapat penggunaan parameter-parameter dengan detail sebagai berikut:
+
+      - *n_estimators* dengan nilai **10** untuk melakukan set pohon untuk bercabang sebanyak maksimal **10** kali.
+      - *max_depth* dengan nilai **4** agar pohon cabang hanya melakukan percabangan yang lebih kecil lagi sebanyak paling dalam **4** kali kedalaman.
+      - *random_state* dengan nilai **25** agar nilai random yang dilakukan *sampling* konsisten pada kombinasi **ke-25**.
+      - *n_jobs* dengan nilai **-1** agar pekerjaan yang dilakukan oleh model dilakukan secara paralel pada keseluruhan proses.
+  
+      **Fit Data ke Model**
+      ```py
+      rfModel.fit(X_train, y_train)
+      ```
+      Perintah di atas bertujuan untuk menyesuaikan model dengan fitur-fitur yang sudah disiapkan yaitu **fitur X** dan **fitur y**.
+
+      **Merangkum Hasil**
+      ```py
+      trainModels.loc['trainMSE', 'RandomForest'] = mean_squared_error(y_pred=rfModel.predict(X_train), y_true=y_train)
+      ```
+      Perintah di atas bertujuan untuk memasukkan hasil prediksi dengan metrik ***Mean Squared Error* (MSE)** yang akan dijelaskan lebih lanjut pada bab evaluasi. Terdapat proses-proses yang terjadi yaitu melakukan prediksi pada fitur *X_train* dengan membandingkan nilai asli **y_train** sebagai bahan acuan. 
+
+      Setelah proses *training* fitur train baik x maupun y, lalu tampilkan hasilnya dengan perintah :
+
+      ```py
+      trainModels.loc['trainMSE', :]
+      ``` 
+
+      Hasilnya adalah sebagai berikut :
+
+      | K-Nearest Neighbors | Random Forest|
+      |:-:|:-:|
+      | 0.148428 | 1.298258 |
+
+      Dari hasil di atas, dapat disimpulkan bahwa **K-Nearest Neighbors** akan dipilih menjadi algoritma solusi, dengan perolehan error terkecil, yaitu **0.148428**. Selain itu, juga algoritma ini ternyata dapat berjalan dengan baik pada data *training* yang digunakan saat ini yang berukuran relatif kecil.
