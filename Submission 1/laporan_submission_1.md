@@ -47,7 +47,7 @@ Proyek ini dibuat untuk kemudahan masyarakat dalam melakukan pengecekan secara b
 
 3. Algoritma apa yang cocok untuk dilakukan regresi linear?
    
-   Masalah ini mencakup pemilihan algoritma paling optimal dalam memroses kasus yang ada pada *dataset* yang digunakan. 
+   Masalah ini mencakup pemilihan algoritma paling optimal dalam memroses kasus yang ada pada *dataset* yang digunakan. Keputusan akan dipertimbangkan dari nilai *error* masing-masing algoritma.
 
 ## Goals
 1. Mengolah *dataset* agar terstruktur dengan baik, serta *model-friendly*.
