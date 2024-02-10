@@ -27,7 +27,7 @@ Hal ini perlu dilakukan analisis serta penanggulangan lebih lanjut, sebab obesit
 
 Maka dari itu, perlu melakukan berbagai strategi untuk mengurangi resiko masyarakat terkena obesitas. Seperti anjuran mengkonsumsi makanan sehat, olahraga, serta pengadaan infrastruktur ideal untuk peninjauan status tubuh.
 
-Disini saya berinisiatif untuk melakukan analisis lebih lanjut mengenai data masyarakat beserta label yang menunjukkan apakah sedang mengalami obesitas atau tidak dengan proses prediksi menggunakan metode **regresi linear**.
+Dataset ini akan dilakukan analisis lebih lanjut mengenai data masyarakat beserta label yang menunjukkan apakah sedang mengalami obesitas atau tidak dengan proses prediksi menggunakan metode **regresi linear**.
 
 Refrensi: 
    <u>[Perbandingan Kinerja Regresi Decision Tree dan Regresi Linear Berganda untuk Prediksi BMI pada Dataset Asthma](https://ejournal.uksw.edu/juses/article/view/8438/2430)</u>
@@ -45,7 +45,7 @@ Proyek ini dibuat untuk kemudahan masyarakat dalam melakukan pengecekan secara b
    
    Masalah ini mencakup cara menormalisasikan bentuk data, baik dari segi tipe, distribusi, dan *range* nilai yang ada agar model dapat memberikan hasil prediksi yang maksimal.
 
-3. Algoritma apa yang cocok untuk dilakukan regresi linear?
+3. Algoritma apa yang memiliki tingkat akurasi paling optimal dalam memprediksi nilai *Body Mass Index (BMI)*?
    
    Masalah ini mencakup pemilihan algoritma paling optimal dalam memroses kasus yang ada pada *dataset* yang digunakan. Keputusan akan dipertimbangkan dari nilai *error* masing-masing algoritma.
 
@@ -57,6 +57,7 @@ Proyek ini dibuat untuk kemudahan masyarakat dalam melakukan pengecekan secara b
 2. Menciptakan model yang dapat bekerja dengan baik dalam memprediksi nilai *Body Mass Index (BMI)* dari segi akurasi yang baik, dengan nilai *error* yang minimal.
 
    Model yang tercipta tidak mengalami *overfitting*, dapat beradaptasi dengan data baru non latih, dan yang terpenting dapat memprediksi nilai dengan baik.
+
 
 ## Solution Statements
 1. Membuat analisis data dengan visualisasi data yang menggambarkan kondisi data untuk prediksi pada tahap *modeling*.
