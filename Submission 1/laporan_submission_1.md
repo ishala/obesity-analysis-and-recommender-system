@@ -45,7 +45,7 @@ Proyek ini dibuat untuk kemudahan masyarakat dalam melakukan pengecekan secara b
    
    Masalah ini mencakup cara menormalisasikan bentuk data, baik dari segi tipe, distribusi, dan *range* nilai yang ada agar model dapat memberikan hasil prediksi yang maksimal.
 
-3. Algoritma apa yang memiliki tingkat akurasi paling optimal dalam memprediksi nilai *Body Mass Index (BMI)*?
+3. Algoritma apa yang memiliki nilai *error* paling kecil dalam memprediksi nilai *Body Mass Index (BMI)*?
    
    Masalah ini mencakup pemilihan algoritma paling optimal dalam memroses kasus yang ada pada *dataset* yang digunakan. Keputusan akan dipertimbangkan dari nilai *error* masing-masing algoritma.
 
@@ -54,9 +54,9 @@ Proyek ini dibuat untuk kemudahan masyarakat dalam melakukan pengecekan secara b
    
    *Dataset* yang digunakan menjadi lebih rapi, terstruktur, dan dapat digunakan dalam proses regresi linear dengan optimal.
 
-2. Menciptakan model yang dapat bekerja dengan baik dalam memprediksi nilai *Body Mass Index (BMI)* dari segi akurasi yang baik, dengan nilai *error* yang minimal.
+2. Menciptakan model yang dapat bekerja dengan baik dalam memprediksi nilai *Body Mass Index (BMI)* dengan nilai *error* yang minimal.
 
-   Model yang tercipta tidak mengalami *overfitting*, dapat beradaptasi dengan data baru non latih, dan yang terpenting dapat memprediksi nilai dengan baik.
+   Model yang tercipta tidak mengalami *overfitting*, dapat beradaptasi dengan data baru non latih, dan yang terpenting dapat memprediksi nilai dengan baik. Model juga harus memiliki nilai *error* yang kecil berdasarkan metrik yang digunakan.
 
 
 ## Solution Statements
