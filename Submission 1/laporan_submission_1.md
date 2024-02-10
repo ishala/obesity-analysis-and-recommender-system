@@ -188,20 +188,20 @@ Pada proses ini, terdapat beberapa langkah yang dilakukan. Tujuannya adalah memu
 
 
    **Gambar 1. Pencarian *Outliers* Kolom Height**
-
-   ![Hasil Height 1](assets/height1.png)
+   
+   ![Hasil Height 1](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/6efcd767-5138-4c9c-8733-43af0fb920d2)
       
    **Gambar 2. Pencarian *Outliers* Kolom Weight**
-
-   ![Hasil Weight 1](assets/weight1.png)
    
-   **Gambar 3. Pencarian *Outliers* Kolom *BMI*** 
-
-   ![Hasil BMI 1](assets/BMI1.png)
+   ![Hasil Weight 1](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/8e6779f4-123b-458f-bd75-52e80a8f8820)
+   
+   **Gambar 3. Pencarian *Outliers* Kolom *BMI***
+   
+   ![Hasil_ BMI_1](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/982a1d6c-6930-485b-989f-402d5b9026e2)
 
    Dari hasil di atas, terdapat outliers pada kolom **Height** dan **Weight**. Maka selanjutnya adalah menangani data tersebut menggunakan metode **IQR (Inter Quartile Range)**.
 
-4. Penanganan Outlier
+5. Penanganan Outlier
    
       Pada proses ini, dilakukan identifikasi dan eliminasi nilai-nilai outlier yang ada di dalam fitur-fitur yang akan digunakan dalam modeling. Terdapat banyak cara atau rumus dalam mengeliminasinya. Namun, disini akan menggunakan metode IQR atau *Inter Quartile Range*. 
       
@@ -217,27 +217,27 @@ Pada proses ini, terdapat beberapa langkah yang dilakukan. Tujuannya adalah memu
 
       $IQR$ = Inter Quartile Range, jarak antara kuartil 1 dan 3
 
-5. Pencarian Nilai *Outliers* Lanjut
+6. Pencarian Nilai *Outliers* Lanjut
    
    Setelah itu dilakukan pengecekan dengan menggunakan *box plot* lanjut yang ditunjukkan pada **Gambar 4, 5, dan 6**.
 
-   **Gambar 4. Pencarian *Outliers* Kolom Height Lanjut** 
-
-   ![Hasil Height 2](assets/height2.png)
+   **Gambar 4. Pencarian *Outliers* Kolom Height Lanjut**
    
-   **Gambar 5. Pencarian *Outliers* Kolom Weight Lanjut** 
-
-   ![Hasil Weight 2](assets/weight2.png)
+   ![Hasil Height 2](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/4812b284-688b-47c1-a4af-d49b15b24b66)
    
-   **Gambar 6. Pencarian *Outliers* Kolom *BMI* Lanjut** 
-
-   ![Hasil BMI 2](assets/BMI2.png)
+   **Gambar 5. Pencarian *Outliers* Kolom Weight Lanjut**
+   
+   ![Hasil Weight 2](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/70e847eb-448f-47db-9e85-d7ce5eb68fa9)
+   
+   **Gambar 6. Pencarian *Outliers* Kolom *BMI* Lanjut**
+   
+   ![Hasil BMI 2](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/016a4a23-9974-466f-a9d4-e28d2e897ddc)
    
    Dari hasil penghapusan outlier sebelumnya, ternyata masih terdapat data outlier di dalam kolom **Height**. Dan juga, dapat terlihat bahwa nilai outlier merupakan nilai maksimal. 
    
    Maka yang perlu dilakukan adalah mengeksekusi ulang kode-kode penghapusan data outlier (seperti pada langkah sebelumnya)
 
-6. Univariate Analysis
+8. Univariate Analysis
    
    Pada tahap ini, fokusnya adalah mencari pola data dari setiap kolomnya. Dalam pengolahan dan ekstraksi isinya, dibagi menjadi:
 
@@ -256,7 +256,8 @@ Pada proses ini, terdapat beberapa langkah yang dilakukan. Tujuannya adalah memu
       Dengan hasil visualisasi data ditunjukkan pada **Gambar 7**.
 
       **Gambar 7. Visualisasi Data Jumlah Data Kolom *CAEC***
-      ![Hasil CAEC](assets/CAEC.png)
+
+      ![Hasil CAEC](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/56dea09b-2fa7-48e9-a881-b9de51b742c4)
       
       Lalu pada kolom kategori berat badan (*NObeyesdad*), jumlah sampel dan presentase ditunjukkan pada **Tabel 5**.
 
@@ -274,14 +275,16 @@ Pada proses ini, terdapat beberapa langkah yang dilakukan. Tujuannya adalah memu
       Dengan hasil visualisasi data ditunjukkan pada **Gambar 8**
 
       **Gambar 8. Visualisasi Data Jumlah Data Kolom *NObeyesdad***
-      ![Hasil NObeyesdad](assets/nobeyesdad.png)
+
+      ![Hasil NObeyesdad](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/061c3315-e034-4389-92ae-d47d374bdbdb)
 
       2. Kolom Numerik
 
       Pada kolom-kolom numerik, fokusnya yaitu melihat pola persebaran data. Identifikasi bentuk distribusi data ditunjukkan pada **Gambar 9**.
 
       **Gambar 9. Visualisasi Distribusi Data Kolom Numerik**
-      ![Hasil Numerikal](assets/numerical.png)
+   
+      ![Hasil Numerikal](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/948faa5d-f58e-4723-b2f0-b3a957d9e449)
 
       Dengan penjelasan sebagai berikut:
       1. Kolom BMI
@@ -296,7 +299,7 @@ Pada proses ini, terdapat beberapa langkah yang dilakukan. Tujuannya adalah memu
          - Banyak data terbanyak ada di angka 80
          - Banyak data terendah ada di kisaran angka 140 - 160
 
-7. Multivariate Analysis
+10. Multivariate Analysis
 
    Pada proses ini, tujuannya adalah mencari relasi pola pada dua atau lebih kolom untuk menyimpulkan keterkaitan antar kolom-kolom itu. Berikut detailnya:
 
@@ -306,7 +309,9 @@ Pada proses ini, terdapat beberapa langkah yang dilakukan. Tujuannya adalah memu
       Hasil *plotting* kolom *CAEC* dan *BMI* ditunjukkan pada **Gambar 10**.
       
       **Gambar 10. Visualisasi Bentuk Data Kolom *CAEC* terhadap Kolom *BMI***
-       ![Hasil CAEC](assets/multi-CAEC.png)
+      
+      ![multi-CAEC](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/0bbc889d-ce11-452a-9fbd-7e7b46ce8050)
+
 
       - Rata-rata BMI bervariasi, dengan frekuensi memakan cemilan kategori "sometimes" memiliki rata-rata tertinggi
       - Frekuensi memakan cemilan kategori "frequently" memiliki rata-rata terendah
@@ -315,27 +320,30 @@ Pada proses ini, terdapat beberapa langkah yang dilakukan. Tujuannya adalah memu
       Hasil *plotting* kolom *NObeyesdad* dan *BMI* ditunjukkan pada **Gambar 11**.
       
       **Gambar 11. Visualisasi Bentuk Data Kolom *NObeyesdad* terhadap Kolom *BMI***
-      ![Hasil CAEC](assets/multi-NObeyesdad.png)
+
+      ![multi-NObeyesdad](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/4da797b7-d7ca-4573-bbad-02543f72b36e)
 
       - Rata-rata BMI bervariasi, dengan kategori "*obesity_type_iii*" memiliki rata-rata tertinggi
       - Kategori "*insufficient_weight*" memiliki rata-rata terendah
       - Dapat diasumsikan bahwa fitur *NObeyesdad* memiliki pengaruh relatif tinggi terhadap fitur *BMI*, sebab fitur ini merepresentasikan langsung data *BMI* yang dikonversikan dalam bentuk kategorikal.
 
-   2. Kolom Numerik
+   3. Kolom Numerik
       
       Pada kolom numerik akan dilakukan beberapa langkah *plotting* dengan memasukkan semua kolom numerikal secara bersamaan. Hal ini berbeda dengan kolom kategorikal yang dilakukan antar dua kolom.
 
       *Plotting* menggunakan *Pair Plot* ditunjukkan pada **Gambar 12**.
       
       **Gambar 12. Visualisasi Bentuk *Plotting* dengan *Pair Plot***
-      ![Hasil Pair Plot](assets/multi-numerical-pairplot.png)
+
+      ![multi-numerical-pairplot](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/ccc0956e-1753-42f5-88c0-7cfd4d80acba)
 
       Terdapat korelasi positif kuat antara kolom **Weight** dan **BMI** ditandai dengan pola semu menjulang ke atas secara linear. Hal ini sesuai dengan topik data yang digunakan, yaitu representasi keadaan berat badan dengan *Body Mass Index (BMI)* terhadap indikasi obesitas. Dan Kolom *Height* tidak berkorelasi dengan kolom *BMI*.
 
       Selanjutnya adalah melakukan *Plotting* menggunakan *Heat Map* ditunjukkan pada **Gambar 13**.
       
       **Gambar 13. Visualisasi Bentuk *Plotting* dengan *Heat Map***
-      ![Hasil Heat Map](assets/multi-numerical-heatmap.png)
+
+      ![multi-numerical-heatmap](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/674d748f-b4d9-41ec-808f-16572445b63c)
 
       Dari hasil di atas, terlihat bahwa kolom **Weight** memiliki relasi positif kuat dengan kolom **BMI** dengan nilai korelasi mendekati positif (+) 1.
 
@@ -356,7 +364,8 @@ Pada tahap ini, data yang ada akan diolah sedemikian rupa agar bekerja dengan ba
    Pada kasus dataset ini, nampaknya tidak perlu dilakukan reduksi dimensi dengan PCA dikarenakan hanya ada 2 fitur numerik yang tidak memiliki bentuk yang mirip. Yaitu *Height* dan *Weight* yang ditunjukkan pada **Gambar 14**.
 
    **Gambar 14. Peninjauan Korelasi Sebagai Prasyarat Reduksi Dimensi Dengan *PCA***
-   ![Hasil PCA](assets/pca.png)
+   
+   ![pca](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/866c06bf-cef6-4542-b23c-af742e9e21a3)
 
    Fitur *Height* dan *Weight* tidak memiliki korelasi, tidak berbentuk pola. Jika dilakukan reduksi dan penghapusan fitur asli, akan merusak standarisasi yang akan dilakukan pada *step* selanjutnya.
 
@@ -455,13 +464,13 @@ Pada proses analisis saat ini, prediksi yang dilakukan adalah menggunakan metode
 
 Metrik ini bekerja dengan menghitung seberapa jauh perbedaan antara nilai sebenarnya dengan nilai hasil prediksi. Semakin jauh perbedaannya, maka semakin tidak akurat. Jauh dan tidaknya dilihat dari hasil *error* yang didapatkan. Berikut adalah formulanya:
 
-$MSE = \frac{1}{n} \sum_{i=1}^{n} (\text{y}_i - \text{y}\_\text{pred}_{i})^2$
+MSE = $\frac{1}{n}\sum\limits_{i=1}^n (y_i - \hat{y}_i)^2$
 
 Dengan penjelasan sebagai berikut:
 
-- ${n}$ adalah jumlah observasi dalam dataset
+- $\frac{1}{n}\sum\limits_{i=1}^n$ adalah pembagian angka 1 dengan jumlah observasi dalam dataset. Penjumlahan dilakukan secara iteratif dari angka 1.
 - $\text{y}_i$ adalah nilai sebenarnya ke-${i}$
-- $\text{y}\_\text{pred}_{i}$ adalah nilai hasil prediksi ke-${i}$
+- $\hat{y}_i$ adalah nilai hasil prediksi ke-${i}$
 
 Selanjutnya adalah implementasi pada fitur *X_test*. Berikut adalah tahapan-tahapannya:
 
@@ -486,13 +495,15 @@ Selanjutnya adalah implementasi pada fitur *X_test*. Berikut adalah tahapan-taha
       Selain itu, juga dilakukan *plotting* menggunakan *horizontal bar chart* yang ditunjukkan pada **Gambar 15**.
 
       **Gambar 15. Visualisasi *Error* Algoritma *KNN* dan *Random Forest* pada Data *Training* dan *Testing***
-      ![Hasil Komparasi](assets/compare-error.png)
+
+     ![compare-error](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/61957046-eacb-4a24-8dc5-59d4486a9089)
+
       Dari tabel hasil di atas, dapat disimpulkan bahwa ternyata saat dilakukan evaluasi metrik pada *KNN* dan *Random Forest* menggunakan *MSE*, hasil uji data testing pada ***KNN*** lebih kecil daripada ***Random Forest*** dari segi nilai *error*-nya. 
       
 
       Untuk sementara dapat dikatakan bahwa ***KNN* lebih baik** performanya dibandingkan dengan Random Forest. Selanjutnya dapat dilakukan evaluasi hasil prediksi.
 
-  3. Evaluasi Prediksi
+  4. Evaluasi Prediksi
 
       Untuk memastikan algoritma mana yang cocok adalah mencoba membandingkan data asli dengan data hasil prediksi. Semakin mirip, maka algoritma itu baik performanya dalam memprediksi.
 
