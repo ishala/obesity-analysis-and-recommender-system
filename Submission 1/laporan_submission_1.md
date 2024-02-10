@@ -37,21 +37,26 @@ Refrensi:
 Proyek ini dibuat untuk kemudahan masyarakat dalam melakukan pengecekan secara berkala *Body Mass Index (BMI)* mereka dari ukuran tinggi badan dan berat badan.
 
 ## Problem Statements
-1. Bagaimana cara untuk mengurangi potensi masyarakat terkena obesitas?
+1. Fitur apa yang memiliki pengaruh tinggi terhadap perhitungan nilai *BMI*?
+   
+   Masalah ini mencakup pemilihan fitur atau kolom yang dapat digunakan sebagai tolak ukur prediksi nilai *Body Mass Index (BMI)* dalam perhitungan resmi.
 
-   Mengangkat masalah pada potensi masyarakat terkena obesitas, seperti pola hidup, dan makanan yang dikonsumsi. 
+2. Bagaimana agar fitur-fitur penting yang ada di dalam *dataset* dapat digunakan pada model?
+   
+   Masalah ini mencakup cara menormalisasikan bentuk data, baik dari segi tipe, distribusi, dan *range* nilai yang ada agar model dapat memberikan hasil prediksi yang maksimal.
 
-2. Dari segi aspek apa saja tubuh dapat dikatakan tidak obesitas?
-
-   Mencari aspek yang dapat dianalisis seperti berat badan, tinggi badan, dan *Body Mass Index (BMI)*. Membuktikan bahwa parameter-parameter ini yang dapat menjadi acuan seseorang mengidap obesitas atau tidak dengan penghitungan BMI secara resmi.
+3. Algoritma apa yang cocok untuk dilakukan regresi linear?
+   
+   Masalah ini mencakup pemilihan algoritma paling optimal dalam memroses kasus yang ada pada *dataset* yang digunakan. 
 
 ## Goals
-1. Memberikan insight pada data mengenai kriteria penderita obesitas.
+1. Mengolah *dataset* agar terstruktur dengan baik, serta *model-friendly*.
    
-   Memberikan informasi terhadap data orang yang terkena obesitas maupun tidak. Berdasarkan ukuran badan seperti tinggi badan, berat badan, dan BMI.
-2. Memberikan gambaran umum pada ciri-ciri tubuh yang sehat.
+   *Dataset* yang digunakan menjadi lebih rapi, terstruktur, dan dapat digunakan dalam proses regresi linear dengan optimal.
 
-   Memberikan informasi terkait ciri-ciri tubuh yang sehat dan tidak terindikasi obesitas.
+2. Menciptakan model yang dapat bekerja dengan baik dalam memprediksi nilai *Body Mass Index (BMI)* dari segi akurasi yang baik, dengan nilai *error* yang minimal.
+
+   Model yang tercipta tidak mengalami *overfitting*, dapat beradaptasi dengan data baru non latih, dan yang terpenting dapat memprediksi nilai dengan baik.
 
 ## Solution Statements
 1. Membuat analisis data dengan visualisasi data yang menggambarkan kondisi data untuk prediksi pada tahap *modeling*.
@@ -520,7 +525,6 @@ Selanjutnya adalah implementasi pada fitur *X_test*. Berikut adalah tahapan-taha
       | 2077 | 46.027679 | 46.5 | 47.5 |
       | 1204 | 28.969812 | 28.9 | 27.4 |
 
-      Ternyata, sudah jelas bahwa algoritma ***K-Nearest Neighbors*** lebih unggul daripada algoritma ***Random Forest*** dalam hal memprediksi nilai ***BMI*** dari bahan ajar nilai **Berat Badan (*Weight*)** dan **Tinggi Badan (*Height*)** dengan selisih nilai asli dan nilai prediksi yang sedikit.
 
 # Conclusion
 Dari hasil analisis ini, telah didapatkan sebuah model regresi untuk memprediksi angka *Body Mass Index (BMI)* seseorang dari input tinggi badan dan berat badan. Model ini akan memudahkan pengguna untuk mengetahui *level* berat badan mereka dari angka ideal. Model ini masih memerlukan improvisasi seperti pelabelan *level BMI* yang didapatkan dari hasil prediksi.
