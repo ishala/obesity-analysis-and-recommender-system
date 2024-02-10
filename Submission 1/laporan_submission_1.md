@@ -5,7 +5,7 @@
 ## Latar Belakang
 Masalah gizi merupakan hal yang sangat kompleks dan serius. Karena menyangkut kualitas penerus-penerus bangsa. Seperti halnya di Indonesia. Salah satu masalah gizi yang masih menjadi pembahasan hangat adalah obesitas.
 
-Obesitas merupakan suatu kondisi medis yang ditandai oleh penimbunan lemak tubuh berlebihan, yang dapat meningkatkan risiko terjadinya berbagai penyakit kronis. Faktor-faktor seperti pola makan yang tidak sehat, gaya hidup yang kurang aktif, dan perubahan budaya telah berkontribusi pada meningkatnya angka obesitas di seluruh dunia.
+Obesitas  merupakan  suatu  keadaan  yang  terjadi  jika  kuantitas  jaringan  lemak tubuh dibandingkan dengan berat badan total lebih besar dari keadaan normalnya,  atau suatu  keadaan  di  mana  terjadi  penumpukan  lemak  tubuh  yang  berlebih  sehingga  berat badan   seseorang   jauh   di   atas   normal. Obesitas   dapat   terjadi   karena   adanya ketidakseimbangan  antara  energi  dari  makanan  yang  masuk  lebih  besar  dibanding dengan energi yang digunakan tubuh (Sandjaja dan Sudikno, 2014).
 
 Menurut data Organisasi Kesehatan Dunia (WHO), obesitas telah mencapai tingkat epidemiologi, dengan lebih dari 650 juta orang dewasa di seluruh dunia dinyatakan obesitas pada tahun 2016. Pada paparan informasi [**"Panduan Hari Obesitas Sedunia"**](https://ayosehat.kemkes.go.id/pub/files/0b43c48e8765bf62a02f42a1359349d5.pdf) yang disampaikan oleh Ditjen Pencegahan dan Pengendalian Penyakit bersama Kementerian Kesehatan Republik Indonesia, Secara global, lebih dari **160 juta** kehidupan sehat yang hilang disebabkan oleh Indeks Massa Tubuh (IMT) (atau dalam bahasa inggris biasa disebut *Body Mass Index (BMI)*) yang tinggi pada tahun 2019, dan angkanya kemungkinan akan lebih tinggi setiap tahun. Ini berarti lebih dari 20% dari semua tahun kehidupan sehat yang hilang yang disebabkan oleh kesehatan kronis yang dapat dicegah. Serta, pada tahun 2030 diprediksi 1 dari 5 wanita dan 1 dari 7 pria akan hidup dengan obesitas (setara dengan lebih dari 1 miliar orang di seluruh dunia).
 
@@ -32,6 +32,7 @@ Dataset ini akan dilakukan analisis lebih lanjut mengenai data masyarakat besert
 Refrensi: 
    <u>[Perbandingan Kinerja Regresi Decision Tree dan Regresi Linear Berganda untuk Prediksi BMI pada Dataset Asthma](https://ejournal.uksw.edu/juses/article/view/8438/2430)</u>
    
+   <u>[Obesitas dan Obesitas Sentral pada Masyarakat Usia Dewasa di Daerah Perkotaan Indonesia](https://salnesia.id/jika/article/view/74/49)</u>
 
 # Business Understanding
 Proyek ini dibuat untuk kemudahan masyarakat dalam melakukan pengecekan secara berkala *Body Mass Index (BMI)* mereka dari ukuran tinggi badan dan berat badan.
@@ -50,11 +51,15 @@ Proyek ini dibuat untuk kemudahan masyarakat dalam melakukan pengecekan secara b
    Masalah ini mencakup pemilihan algoritma paling optimal dalam memroses kasus yang ada pada *dataset* yang digunakan. Keputusan akan dipertimbangkan dari nilai *error* masing-masing algoritma.
 
 ## Goals
-1. Mengolah *dataset* agar terstruktur dengan baik, serta *model-friendly*.
+1. Memaknai setiap fitur yang ada untuk diambil fitur paling berpengaruh terhadap nilai *Body Mass Index (BMI)*.
+   
+   Pemaknaan fitur dilakukan dengan berbagai metode eksplorasi data seperti pemeriksaan korelasi, serta pemahaman pada deskripsi setiap fitur.
+
+2. Mengolah *dataset* agar terstruktur dengan baik, serta *model-friendly*.
    
    *Dataset* yang digunakan menjadi lebih rapi, terstruktur, dan dapat digunakan dalam proses regresi linear dengan optimal.
 
-2. Menciptakan model yang dapat bekerja dengan baik dalam memprediksi nilai *Body Mass Index (BMI)* dengan nilai *error* yang minimal.
+3. Menciptakan model yang dapat bekerja dengan baik dalam memprediksi nilai *Body Mass Index (BMI)* dengan nilai *error* yang minimal.
 
    Model yang tercipta tidak mengalami *overfitting*, dapat beradaptasi dengan data baru non latih, dan yang terpenting dapat memprediksi nilai dengan baik. Model juga harus memiliki nilai *error* yang kecil berdasarkan metrik yang digunakan.
 
@@ -531,4 +536,6 @@ Selanjutnya adalah implementasi pada fitur *X_test*. Berikut adalah tahapan-taha
 Dari hasil analisis ini, telah didapatkan sebuah model regresi untuk memprediksi angka *Body Mass Index (BMI)* seseorang dari input tinggi badan dan berat badan. Model ini akan memudahkan pengguna untuk mengetahui *level* berat badan mereka dari angka ideal. Model ini masih memerlukan improvisasi seperti pelabelan *level BMI* yang didapatkan dari hasil prediksi.
 
 # References
-[1] Tegar Nurani, A. Setiawan A. Susanto B, "Perbandingan Kinerja Regresi Decision Tree danRegresi Linear Berganda untuk Prediksi BMI pada Dataset Asthma" *Jurnal Sains dan Edukasi Sains*, vol. 6, no. 1, pp 34-43, 2023.
+[1] Nurani, A. T. Setiawan A. Susanto B, "Perbandingan Kinerja Regresi Decision Tree danRegresi Linear Berganda untuk Prediksi BMI pada Dataset Asthma" *Jurnal Sains dan Edukasi Sains*, vol. 6, no. 1, pp.34-43, 2023.
+
+[2] Septiyanti, Seniwati, "Obesitas dan Obesitas Sentral pada Masyarakat Usia Dewasa di Daerah Perkotaan Indonesia", *Jurnal Ilmiah Kesehatan*, vol. 2, no. 3, pp.118-127, 2020.
