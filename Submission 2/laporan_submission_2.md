@@ -17,10 +17,10 @@ Maka dari itu, perlu penyeimbang dalam setiap makanan yang kita konsumsi dengan 
 
 Maka dari itu, perlu untuk menelaah tipe diet yang sesuai pada kondisi tubuh berdasarkan jenis makanan yang sesuai. 
 
-## Ulasan Proyek
+## Ringkasan Tujuan Proyek
 Dari pemaparan informasi di atas, maka perlu pengadaan suatu alat atau media untuk menyarankan masyarakat agar mengerti apa saja jenis makanan dengan resep-resep yang benar. Proses penyaranan ini menggunakan **teknik atau sistem rekomendasi** yang merekomendasikan jenis-jenis diet beserta contoh resep makanan. 
 
-Dari dataset ini, akan dilakukan pengolahan serta pembuatan **algoritma rekomendasi hibrida**  (*Content-Based System*, dan *Deep System*) menggunakan *Machine Learning* yang akan memaksimalkan interaksi jenis diet dengan jenis-jenis diet lainnya. Hasil akhir akan memunculkan sekumpulan *Top-N Recommended Items*. Pada prosesnya, akan memaksimalkan penggunaan setiap fitur yang ada pada dataset yang ada.
+Dari dataset ini, akan dilakukan pengolahan serta pembuatan **algoritma rekomendasi hibrida**  (*Content-Based System*, *User-Based System*, dan *Deep System*) menggunakan *Machine Learning* yang akan memaksimalkan interaksi jenis diet dengan jenis-jenis diet lainnya. Hasil akhir akan memunculkan sekumpulan *Top-N Recommended Items*. Pada prosesnya, akan memaksimalkan penggunaan setiap fitur yang ada pada dataset yang ada.
 
 Referensi:
 
