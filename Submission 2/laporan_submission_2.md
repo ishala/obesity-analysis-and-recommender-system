@@ -68,3 +68,160 @@ Proyek ini dibuat untuk memberikan media berbasis sistem rekomendasi untuk masya
       Pada model ini, data yang digunakan berasal dari **dataset *users*** yang sudah terstruktur dan *model-friendly*. Hasil dari model ini yaitu data pendukung atau juga pengganti model *Content-Based Filtering*. Pergantiannya ditandai dengan algoritma yang condong merekomendasikan tipe diet berdasarkan tipe diet yang dipilih oleh orang lain dengan data demografis yang mirip.
 4. Mengintegrasikan kedua algoritma yang sudah dibuat dengan dataset-dataset yang ada, agar dapat bekerja secara bergantian sesuai dengan kondisi yang ada. Pengintegrasian menjadikan kedua algoritma di atas menjadi *Collaborative Filtering* ditambah dengan metode *matrix factorization* dan *deep learning*.
 5. Menggunakan metrik akurasi pada *library* **Tensorflow** hasil proses *training* dan *testing* pada data yang ada. Kisaran besar akurasi yang dituju adalah yang paling maksimal, dengan pertimbangan hasil rekomendasi yang muncul.
+
+# Data Understanding
+Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk analisis. Berikut detailnya:
+
+## Informasi Data
+   Terdapat dua jenis data yang digunakan pada analisis ini, yaitu:
+   1. Data sumber-terbuka (*open source*) dengan judul **Diet, Recipes And Their Nutrients** yang memuat informasi jenis masakan sehat yang sesuai dengan jenis diet yang beragam. Terdapat informasi nilai gizi yang terkandung pada setiap jenis masakan yang ada pada data. Data ini dikumpulkan oleh **The Devastator**. Dari sumbernya, terbagi menjadi beberapa dataset per kategori diet. Yang digunakan hanya pada dataset *all diets*. Kondisi awal data sudah cukup bersih, dengan beberapa nilai *outliers* yang masih kurang baik. Butuh beberapa langkah penanangan hingga data benar-benar bersih.
+
+      Informasi Lanjutan:
+
+      - Jumlah Baris: 7806
+      - Jumlah Kolom: 8
+
+      Dengan penjelasan fitur dan variabel di dalam datset ditunjukkan pada **Tabel 1.a**.
+
+      **Tabel 1.a Penjelasan Fitur dan Variabel Pada Dataset Diet**
+
+      | No. | Nama Kolom | Deskripsi|
+      |:--:|:--:|:-|
+      | 1. | Diet_type | Tipe diet yang bersangkutan dengan satu baris data|
+      | 2. | Recipe_name | Nama resep makanan |
+      | 3. | Cuisine_type | Asal daerah resep makanan |
+      | 4. | Protein(g) | Banyak protein yang terkandung pada masakan dalam satuan *gram* |
+      | 5. | Carbs(g) | Banyak karbohidrat yang terkandung pada masakan dalam satuan *gram* |
+      | 6. | Fat(g) | Banyak lemak yang terkandung pada masakan dalam satuan *gram* |
+      | 7. | Extraction_day | Tanggal resep dibuat |
+      | 8. | Extraction_time | Waktu resep dibuat |
+
+      [Link Dataset Diets, Recipes And Their Nutrients](https://www.kaggle.com/datasets/thedevastator/healthy-diet-recipes-a-comprehensive-dataset?select=All_Diets.csv)
+
+      Fitur-fitur yang digunakan untuk sistem rekomendasi adalah **Diet_type, Recipe_name, Cuisine_type, Protein(g), Carbs(g)**, dan **Fat(g)**. Fitur **Diet_type, Recipe_name,** dan **Cuisine_type** digunakan sebagai fitur utama untuk merekomendasikan pengguna dalam memilih jenis masakan berdasarkan tipe dietnya untuk rekomendasi *Content-based Filtering*.
+
+   2. Data sumber-terbuka (*open source*) dengan judul **Obesity Dataset Cleaned and Data Sinthetic** yang memuat tentang informasi gaya hidup penduduk di Mexico, Peru, dan Colombia. Data ini dikumpulkan oleh **ScienceDirect** dibawah lisensi Creative Commons. Kondisi awal data sudah cukup bersih, dengan sedikit nilai *outliers* yang dapat dengan mudah dibersihkan.
+   
+      Informasi lanjutan:
+      - Jumlah Baris: 2111
+      - Jumlah kolom: 19
+
+      Dengan penjelasan fitur dan variabel didalam dataset ditunjukkan pada **Tabel 1.b**.
+
+      **Tabel 1.b Penjelasan Fitur dan Variabel Pada Dataset**
+
+      | No. | Nama Kolom | Deskripsi |
+      |:--:|:-:|:-|
+      | 1. | Id | Kolom index pada setiap baris data |
+      | 2. | BMI | Indeks masa tubuh ideal |
+      | 3. | Gender | Jenis Kelamin target yang diobservasi  |
+      | 4. | Age | Usia target yang diobservasi  |
+      | 5. | Height | Tinggi badan dalam satuan *inch* target yang diobservasi |
+      | 6. | Weight | Tinggi badan dalam satuan *inch* target yang diobservasi |
+      | 7. | family_history_with_overweight | Riwayat keluarga dengan berat badan berlebih (obesitas) |
+      | 8. | FAVC | Frekuensi mengkonsumsi makanan tinggi kalori target yang diobservasi |
+      | 9. | FCVC | Frekuensi mengkonsumsi sayur-mayur target yang diobservasi |
+      | 10. | NCP | Jumlah makan pokok perhari target yang diobservasi |
+      | 11. | CAEC | Frekuensi makan cemilan target yang diobservasi |
+      | 12. | SMOKE | Kebiasaan merokok target yang diobservasi |
+      | 13. | CH2O | Jumlah minum air target yang diobservasi |
+      | 14. | SCC | Kebiasaan monitoring konsumsi kalori target yang diobservasi |
+      | 15. | FAF | Frekuensi kegiatan fisik target yang diobservasi |
+      | 16. | TUE | Waktu penggunaan perangkat dalam satuan *jam* target yang diobservasi |
+      | 17. | CALC | Frekuensi mengkonsumsi alkohol target yang diobservasi |
+      | 18. | MTRANS | Kategori transportasi yang digunakan target yang diobservasi |
+      | 19. | NObeyesdad | Kategori berat badan |
+
+      [Link Dataset Obesity Dataset Cleaned and Data Sinthetic](https://www.kaggle.com/datasets/mandysia/obesity-dataset-cleaned-and-data-sinthetic)
+
+      Fitur-fitur yang digunakan adalah **Id, BMI, Weight, Gender, Age, NObeyesdad,** dan **family_history_with_overweight** sebagai data demografis pengguna untuk rekomendasi *User-based Filtering*.
+
+   ## Pembersihan dan Persiapan Data
+   Pada prosesnya, pembersihan dan persiapan data terbagi menjadi beberapa tahapan. Berikut detailnya:
+
+   ### Data Loading
+   Pada proses ini, dilakukan proses pemuatan data ke dalam *workspace* yang digunakan, pada kasus ini adalah *notebook*.
+
+   ### Data Assessing 
+
+   Pada proses ini, dilakukan penilaian pada kelayakan data. Hal ini terdiri dari beberapa aspek pengecekan. Berikut detailnya:
+
+   1. Penilaian Dataset Awal
+
+      Pada tahap ini, yang dilakukan adalah melihat informasi keseluruhan dari dataset seperti nama kolom, jumlah data per kolom, tipe data kolom, dan lain-lain. 
+
+      **Data Diet** 
+
+      Informasi penting pada data ini sudah disajikan pada **Tabel 2.a**.
+
+      **Tabel 2.a Informasi Tipe Data dan Jumlah Kolom Data Diet**
+
+      | Tipe Data Kolom | Jumlah Kolom |
+      |:----------:|:----------:|
+      | Object |    5    |
+      | Float |    3    |
+
+      **Data *Users***
+
+      Informasi penting pada data ini sudah disajikan pada **Tabel 2.b**
+
+      **Tabel 2.b Informasi Tipe Data dan Jumlah Kolom Data *Users***
+      | Tipe Data Kolom | Jumlah Kolom |
+      |:----------:|:----------:|
+      | Object |    14    |
+      | Float |    3    |
+      | Integer |    2    |
+
+   2. Pengecekan Data *Null*
+
+      Pada tahap ini, dilakukan peninjauan terhadap nilai-nilai baris yang ada di setiap kolom pada setiap dataset. Tujuannya adalah untuk melihat banyak nilai *null* disetiap kolomnya. Setelah dilakukan pengecekan, data sudah bersih dari data *null*.
+
+   3. Pengecekan Data Duplikat
+
+      Pada tahap ini, dilakukan peninjauan pada nilai-nilai yang terduplikasi secara *unique* pada setiap dataset. Tujuannya adalah untuk mengurangi distorsi pada data akibat adanya data duplikat. Hasil pemeriksaan sudah tidak ditemukan nilai duplikat dari keseluruhan kolom.
+
+   4. Deskripsi Nilai Statistik Dataset
+
+      Pada tahap ini, dilakukan identifikasi awal nilai-nilai statisktik pada kolom numerik di setiap dataset.
+
+      **Data Diet**
+
+      Informasi nilai statistik pada data ini ditunjukkan pada **Tabel 3.a**
+
+      **Tabel 3.a Informasi Nilai Statistik Data Diet**
+      |  | Protein(g) | Carbs(g) | Fat(g) |
+      |:-|:-:|:-:|:-:|
+      | count | 7806 | 7806 | 7806 |
+      | mean  | 83.231498  | 152.123189 | 117.328542 |
+      | std   | 89.797282  | 185.907322 | 122.098117 |
+      | min   | 0.000000  | 0.060000 | 0.000000 |
+      | 25%   | 24.415000  | 36.162500 | 41.067500 | 
+      | 50%   | 56.280000 | 93.415000 | 84.865000 |
+      | 75%   | 112.357500 | 205.915000 | 158.290000 |
+      | max   | 1273.610000 | 3405.550000 | 1930.240000 |
+
+      Dari hasil pengecekan data-data tak lazim pada data diet menggunakan beberapa langkah pengecekan, terdeteksi masih terdapat data duplikat yang perlu dibersihkan.
+
+      **Data *Users***
+
+      Informasi nilai statistik pada data ini ditunjukkan pada **Tabel 3.b**
+
+      **Tabel 3.b Informasi Nilai Statistik Data Diet**
+      |  | Age | Height | Weight | NCP | BMI |
+      |:-|:-:|:-:|:-:|:-:|:-:|
+      | count | 2111 | 2111 | 2111 | 2111 | 2111 |
+      | mean  | 24.315964  | 1.701677 | 86.588820 | 2.687826 | 29.700159 |
+      | std   | 6.357078  | 0.093305 | 26.188572 | 0.809680 | 8.011337 |
+      | min   | 14.000000  | 1.450000 | 39.000000 | 1.000000 | 12.998685 |
+      | 25%   | 20.000000  | 1.630000 | 65.500000 | 3.000000 | 24.325802 |
+      | 50%   | 23.000000 | 1.700499 | 83.000000 | 3.000000 | 28.719089 |
+      | 75%   | 26.000000 | 1.768464 | 107.000000 | 3.000000 | 36.016501 |
+      | max   | 61.000000 | 1.980000 | 173.000000 | 4.000000 | 50.811753 |
+
+      Dari hasil pengecekan data-data tak lazim pada data *users* menggunakan beberapa langkah pengecekan, terdeteksi masih terdapat kesalahan tipe data pada kolom **Weight**.
+   
+   ### Data Cleaning
+
+   Pada tahap ini, terdapat dua langkah yang dilakukan, yaitu:
+   1. Menghapus data duplikat pada dataset diet.
+   2. Mengubah tipe data kolom **Weight** pada dataset *users*.
