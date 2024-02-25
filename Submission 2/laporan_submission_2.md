@@ -400,7 +400,7 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
       ![Hasil Carbs(g) 3](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/d4aea19a-c60c-4b2b-98df-d3404a38a918)
 
 
-      **Gambar 8 Pencarian *Outliers* Khusus Dataset Diet Kolom Fat(g)**
+      **Gambar 9 Pencarian *Outliers* Khusus Dataset Diet Kolom Fat(g)**
 
       ![Hasil Fat(g) 3](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/2984616f-2c25-44d3-b06e-897860b53145)
 
