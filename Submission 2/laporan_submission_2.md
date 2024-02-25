@@ -288,15 +288,18 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
          **Gambar 1.a Pencarian *Outliers* Kolom Protein(g)**
 
-         ![Hasil Protein(g) 1]()
+         ![Hasil Protein(g) 1](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/e0f97a5c-8c41-405a-806a-333cf10c0ba5)
+)
 
          **Gambar 2.a Pencarian *Outliers* Kolom Carbs(g)**
 
-         ![Hasil Carbs(g) 1]()
+         ![Hasil Carbs(g) 1](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/e080a8de-4e06-481a-b522-4ab523a5de15)
+
 
          **Gambar 3.a Pencarian *Outliers* Kolom Fat(g)**
 
-         ![Hasil Fat(g) 1]()
+         ![Hasil Fat(g) 1](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/601ee799-1980-4ad2-9236-20ea8ab4d883)
+
 
          Dari hasil di atas, terdapat banyak sekali nilai *outliers* dari semua kolom yang ada. Maka selanjutnya, perlu untuk menanganinya dengan cara dihapus menggunakan metode **IQR (Inter Quartile Range)**.
 
@@ -306,15 +309,18 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
          **Gambar 1.b Pencarian *Outliers* Kolom BMI**
 
-         ![Hasil BMI 1]()
+         ![Hasil BMI 1](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/a21b7ec9-9eda-4903-bf9f-c1cc7430b526)
+
          
          **Gambar 2.b Pencarian *Outliers* Kolom Weight**
 
-         ![Hasil Weight 1]()
+         ![Hasil Weight 1](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/fcb8ee56-11b0-4fcc-9ce9-1c757fcc39ad)
+
 
          **Gambar 3.b Pencarian *Outliers* Kolom Age**
 
-         ![Hasil Age 1]()
+         ![Hasil Age 1](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/99f00b35-71ab-4b89-93c3-5de20a335511)
+
 
          Dari hasil di atas, terdapat 1 nilai *outlier* pada kolom **Weight** dan beberapa nilai *outliers* pada kolom **Age**. Maka selanjutnya, perlu untuk menanganinya dengan cara dihapus menggunakan metode **IQR (Inter Quartile Range)**.
    
@@ -344,15 +350,18 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
          **Gambar 4.a Pencarian Ulang *Outliers* Kolom Protein(g)**
 
-         ![Hasil Protein(g) 2]()
+         ![Hasil Protein(g) 2](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/c966088e-1ccf-4e67-812c-dda71e87d76b)
+
 
          **Gambar 5.a Pencarian Ulang *Outliers* Kolom Carbs(g)**
 
-         ![Hasil Carbs(g) 2]()
+         ![Hasil Carbs(g) 2](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/efa68532-53da-4191-82fc-2735777bc43d)
+
 
          **Gambar 6.a Pencarian Ulang *Outliers* Kolom Fat(g)**
 
-         ![Hasil Fat(g) 2]()
+         ![Hasil Fat(g) 2](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/f717b31e-a75f-48c0-a373-fa0efd3ad437)
+
 
          Dari hasil di atas, ternyata masih tetap ada banyak nilai *outliers* ditemukan. Maka perlu dilakukan penerapan rumus IQR lagi.
 
@@ -362,15 +371,18 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
          **Gambar 4.b Pencarian Ulang *Outliers* Kolom BMI**
 
-         ![Hasil BMI 2]()
+         ![Hasil BMI 2](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/abf53549-74f5-4c72-a0d1-eedc2273b187)
+
 
          **Gambar 5.b Pencarian Ulang *Outliers* Kolom Weight**
 
-         ![Hasil Weight 2]()
+         ![Hasil Weight 2](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/687b5981-7615-4e14-8a66-b71adda8f6dc)
+
 
          **Gambar 6.b Pencarian Ulang *Outliers* Kolom Age**
 
-         ![Hasil Age 2]()
+         ![Hasil Age 2](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/fd8d1281-035a-4da4-b8f1-f86306d09710)
+
 
          Dari hasil di atas, sudah tidak ditemukan nilai *outliers* pada setiap kolom yang ada. Maka dapat disimpulkan bahwa dataset *users* sudah dapat digunakan pada tahap selanjutnya.
    
@@ -380,14 +392,17 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
       **Gambar 7 Pencarian *Outliers* Khusus Dataset Diet Kolom Protein(g)**
 
-      ![Hasil Protein(g) 3]()
+      ![Hasil Protein(g) 3](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/b51f825a-965e-493a-bf17-ab3c5d98a004)
+
 
       **Gambar 8 Pencarian *Outliers* Khusus Dataset Diet Kolom Carbs(g)**
 
-      ![Hasil Carbs(g) 3]()
+      ![Hasil Carbs(g) 3](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/d4aea19a-c60c-4b2b-98df-d3404a38a918)
+
 
       **Gambar 8 Pencarian *Outliers* Khusus Dataset Diet Kolom Fat(g)**
 
-      ![Hasil Fat(g) 3]()
+      ![Hasil Fat(g) 3](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/2984616f-2c25-44d3-b06e-897860b53145)
+
 
       Dari hasil di atas, terlihat bahwa sudah tidak ditemukan nilai *outliers* lagi pada dataset diet. Dapat disimpulkan bahwa dataset diet sudah dapat digunakan pada tahap selanjutnya.
