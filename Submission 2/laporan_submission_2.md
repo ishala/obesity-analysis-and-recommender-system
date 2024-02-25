@@ -225,3 +225,169 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
    Pada tahap ini, terdapat dua langkah yang dilakukan, yaitu:
    1. Menghapus data duplikat pada dataset diet.
    2. Mengubah tipe data kolom **Weight** pada dataset *users*.
+   
+   ### Exploratory Data Analysis (EDA)
+
+   Pada proses ini, terdapat beberapa langkah yang dilakukan. Tujuannya adalah memudahkan untuk mengenali dataset dengan pengelompokan dan penyajian secara visual. Berikut detailnya:
+
+   1. Menghapus Kolom yang Tidak Perlu
+      
+      Tahap ini bertujuan untuk mengurangi dimensi dataset tidak terlalu besar, dengan begitu dataset dapat dimuat lebih cepat dan ringan.
+
+      Setelah dilakukan pengurangan jumlah kolom, saat ini datset terdiri dari:
+
+      1. Dataset Diet
+
+         Saat ini, dataset diet hanya terdiri dari 6 kolom yaitu:
+         - Diet_type
+         - Recipe_name
+         - Cuisine_type
+         - Protein(g)
+         - Carbs(g)
+         - Fat(g)
+      2. Dataset *Users*
+
+         Saat ini, dataset *Users* hanya terdiri dari 7 kolom yaitu:
+         - Id
+         - BMI
+         - Weight
+         - Gender
+         - Age
+         - NObeyesdad
+         - family_history_with_overweight
+  
+   2. Pencarian Invalid dan Missing Value Lanjutan
+
+      Pada tahap ini dilakukan pemeriksaan nilai-nilai yang tidak sesuai dengan tujuan analisis. 
+
+      - Dataset Diet
+      
+         Pada **dataset diet**, pemeriksaan nilai tidak valid dengan melihat nilai *unique* di setiap kolom kategorikal. Hasilnya tidak ditemukan nilai yang aneh dan semua data sesuai.
+      
+         Lalu pada kolom numerik, dilakukan pengecekan pada angka kurang dari atau sama dengan 0. Ditemukan terdapat nilai tersebut pada kolom **Protein(g)** dan **Fat(g)**. Yang dilakukan adalah menghapus nilai-nilai itu pada kolom **Protein(g)** dan mempertahankan nilai-nilai yang ada pada kolom **Fat(g)**, sebab menyesuaikan tujuan analisis yaitu merekomendasikan masakan-masakan sehat dan rendah nilai gizi yang menyebabkan obesitas bagi pengguna yang ingin diet.
+
+         Setelah langkah-langkah di atas, dapat disimpulkan bahwa **dataset diet** sudah bersih dan siap diproses pada langkah selanjutnya.
+
+      - Dataset *Users*
+      
+         Pada **dataset *users***, pemeriksaan nilai tidak valid dengan melihat nilai *unique* di setiap kolom kategorikal. Hasilnya tidak ditemukan nilai yang aneh dan semua data sesuai.
+
+         Lalu pada kolom numerik, dilakukan pengecekan angka kurang dari atau sama dengan 0. Juga tidak ditemukan nilai kurang dari atau sama dengan 0. 
+
+         Setelah langkah-langkah di atas, dapat disimpulkan bahwa **dataset *users*** sudah bersih dan siap diproses pada langkah selanjutnya.
+   
+   3. Pencarian Nilai *Outliers*
+
+      Pada proses ini, terdapat beberapa langkah untuk mengidentifikasi nilai *outliers* pada setiap kolom numerik yang akan digunakan untuk fitur-fitur *modelling*. Sebab, jika tidak dibersihkan akan memberikan kualitas data dan model yang tidak maksimal.
+
+      Dalam mengidentifikasi nilai *outliers*, dilakukan pengecekan dengan visualisasi data. Visualisasi menggunakan ***box plot***. Jenis plot ini umum digunakan untuk menampilkan distribusi data. 
+
+      -  Dataset Diet
+         
+         Tampilan visualisasi data ditunjukkan pada **Gambar 1.a, 2.a, dan 3.a**.
+
+         **Gambar 1.a Pencarian *Outliers* Kolom Protein(g)**
+
+         ![Hasil Protein(g) 1]()
+
+         **Gambar 2.a Pencarian *Outliers* Kolom Carbs(g)**
+
+         ![Hasil Carbs(g) 1]()
+
+         **Gambar 3.a Pencarian *Outliers* Kolom Fat(g)**
+
+         ![Hasil Fat(g) 1]()
+
+         Dari hasil di atas, terdapat banyak sekali nilai *outliers* dari semua kolom yang ada. Maka selanjutnya, perlu untuk menanganinya dengan cara dihapus menggunakan metode **IQR (Inter Quartile Range)**.
+
+      -  Dataset *Users*
+
+         Tampilan visualisasi data ditunjukkan pada **Gambar 1.b, 2.b, dan 3.b**.
+
+         **Gambar 1.b Pencarian *Outliers* Kolom BMI**
+
+         ![Hasil BMI 1]()
+         
+         **Gambar 2.b Pencarian *Outliers* Kolom Weight**
+
+         ![Hasil Weight 1]()
+
+         **Gambar 3.b Pencarian *Outliers* Kolom Age**
+
+         ![Hasil Age 1]()
+
+         Dari hasil di atas, terdapat 1 nilai *outlier* pada kolom **Weight** dan beberapa nilai *outliers* pada kolom **Age**. Maka selanjutnya, perlu untuk menanganinya dengan cara dihapus menggunakan metode **IQR (Inter Quartile Range)**.
+   
+   4. Penanganan *Outliers*
+
+      Pada proses ini, dilakukan identifikasi dan eliminasi nilai-nilai *outlier* yang ada di dalam fitur-fitur yang akan digunakan dalam *modeling*. Terdapat banyak cara atau rumus dalam mengeliminasinya. Namun, disini akan menggunakan metode IQR atau *Inter Quartile Range*.
+
+      Rumus IQR:
+
+      $IQR = Q3 - Q1$
+
+      Penjelasan:
+
+      $Q1$ = Kuartil pertama dari data (25%)
+
+      $Q3$ = Kuartil ketiga dari data (75%)
+
+      $IQR$ = Inter Quartile Range, jarak antara kuartil 1 dan 3
+   
+   5. Pencarian Nilai *Outliers* Lanjut.
+
+      Setelah dilakukan penghapusan nilai *outliers* pada tahap sebelumnya, lalu diperiksa lagi dengan visualisasi data menggunakan *box plot*. 
+
+      - Dataset Diet
+         
+         Tampilan visualisasi data ditunjukkan pada **Gambar 4.a, 5.a, dan 6.a**.
+
+         **Gambar 4.a Pencarian Ulang *Outliers* Kolom Protein(g)**
+
+         ![Hasil Protein(g) 2]()
+
+         **Gambar 5.a Pencarian Ulang *Outliers* Kolom Carbs(g)**
+
+         ![Hasil Carbs(g) 2]()
+
+         **Gambar 6.a Pencarian Ulang *Outliers* Kolom Fat(g)**
+
+         ![Hasil Fat(g) 2]()
+
+         Dari hasil di atas, ternyata masih tetap ada banyak nilai *outliers* ditemukan. Maka perlu dilakukan penerapan rumus IQR lagi.
+
+      - Dataset *Users*
+
+         Tampilan visualisasi data ditunjukkan pada **Gambar 4.b, 5.b, dan 6.b**.
+
+         **Gambar 4.b Pencarian Ulang *Outliers* Kolom BMI**
+
+         ![Hasil BMI 2]()
+
+         **Gambar 5.b Pencarian Ulang *Outliers* Kolom Weight**
+
+         ![Hasil Weight 2]()
+
+         **Gambar 6.b Pencarian Ulang *Outliers* Kolom Age**
+
+         ![Hasil Age 2]()
+
+         Dari hasil di atas, sudah tidak ditemukan nilai *outliers* pada setiap kolom yang ada. Maka dapat disimpulkan bahwa dataset *users* sudah dapat digunakan pada tahap selanjutnya.
+   
+   6. Penanganan Sisa Nilai *Outliers* pada Dataset Diet
+      
+      Pada nilai *outliers* di dataset diet, perlu dilakukan penerapan rumus IQR secara berulang. Disini sudah dilakukan pengecekan banyak iterasi perulangan sehingga nilai *outliers* tidak ditemukan lagi. Banyak perulangannya yaitu **8 kali**. Hasilnya ditunjukkan pada **Gambar 7, 8, dan 9**.
+
+      **Gambar 7 Pencarian *Outliers* Khusus Dataset Diet Kolom Protein(g)**
+
+      ![Hasil Protein(g) 3]()
+
+      **Gambar 8 Pencarian *Outliers* Khusus Dataset Diet Kolom Carbs(g)**
+
+      ![Hasil Carbs(g) 3]()
+
+      **Gambar 8 Pencarian *Outliers* Khusus Dataset Diet Kolom Fat(g)**
+
+      ![Hasil Fat(g) 3]()
+
+      Dari hasil di atas, terlihat bahwa sudah tidak ditemukan nilai *outliers* lagi pada dataset diet. Dapat disimpulkan bahwa dataset diet sudah dapat digunakan pada tahap selanjutnya.
