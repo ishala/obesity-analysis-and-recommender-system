@@ -289,7 +289,7 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
          **Gambar 1.a Pencarian *Outliers* Kolom Protein(g)**
 
          ![Hasil Protein(g) 1](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/e0f97a5c-8c41-405a-806a-333cf10c0ba5)
-)
+
 
          **Gambar 2.a Pencarian *Outliers* Kolom Carbs(g)**
 
@@ -406,3 +406,151 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
 
       Dari hasil di atas, terlihat bahwa sudah tidak ditemukan nilai *outliers* lagi pada dataset diet. Dapat disimpulkan bahwa dataset diet sudah dapat digunakan pada tahap selanjutnya.
+
+   7. Pencarian *Insight* Pada Data
+
+      Setelah dilakukan pencarian nilai *outliers*, langkah selanjutnya adalah mencari tahu gambaran umum pada data. Dengan mengetahui rasio besaran setiap data pada setiap kolomnya. Dengan begitu, akan menampilkan informasi mengenai frekuensi banyak setiap nilai *unique* pada setiap kolomnya. Proses yang dilakukan adalah ekstraksi fitur menggunakan *Univariate Analysis*.
+
+      **Kolom Kategorikal**
+      - Dataset Diet
+         
+         **Kolom Diet_type**
+
+         Tujuan dari analisis pada kolom ini untuk mengetahui besar presentase pada setiap jenis diet yang ada. Untuk Informasi besar presentase dan visualisasi datanya ditunjukkan pada **Tabel 4** dan **Gambar 10**.
+
+         **Tabel 4. Besar Presentase dan Jumlah Data *Unique* Kolom Diet_type Dataset Diet**
+
+         | Tipe Diet | Jumlah Sampel | Presentase |
+         |:--:|:--:|:--:|
+         | mediterranean | 1370 | 23% |  
+         | dash | 1354 | 22.7% |  
+         | vegan | 1148 | 19.3% |  
+         | keto | 1104 | 18.5% |  
+         | paleo | 984 | 16.5% | 
+
+         **Gambar 10. Visualisasi Rasio Besar Tiap Data *Unique* Kolom Diet_type Dataset Diet** 
+
+         ![Uni Diet_type]()
+
+         Dari hasil di atas, tipe diet **mediterranean** memiliki besar presentase tertinggi dibandingkan data lainnya. Dengan jenis **paleo** memiliki presentase paling sedikit.
+
+         **Kolom Cuisine_type**
+
+         Tujuan dari analisis pada kolom ini untuk mengetahui besar presentase pada setiap jenis masakan yang ada berdasarkan daerahnya. Untuk informasi besar presentase dan visualisasi datanya ditunjukkan pada **Tabel 5** dan **Gambar 11**.
+
+         **Tabel 5. Besar Presentase dan Jumlah Data *Unique* Kolom Cuisine_type Dataset Diet**
+
+         | Tipe Masakan | Jumlah Sampel | Presentase |
+         |:--:|:--:|:--:|
+         | american | 2057 | 34.5% |  
+         | mediterranean | 1414 | 23.7% |  
+         | italian | 592 | 9.9% |  
+         | french | 466 | 7.8% |  
+         | others | 1431 | 24.0% |
+
+         **Gambar 11. Visualisasi Rasio Besar Tiap Data *Unique* Kolom Cuisine_type Dataset Diet** 
+
+         ![Uni Cuisine_type]()
+
+         Dari hasil di atas, jenis makanan **american** memiliki besar presentase tertinggi dibandingkan dengan data lainnya. Dengan jenis **others** menjadi urutan paling akhir. Jenis **others** merupakan hasil penjumlahan presentase jenis-jenis makanan yang memiliki presentase kurang dari 5%.
+
+      - Dataset *Users*
+
+         **Kolom Gender**
+         
+         Tujuan dari analisis kolom ini untuk mengetahui besar presentase pada setiap jenis kelamin pada dataset ini. Untuk informasi besar presentase dan visualisasi datanya ditunjukkan pada **Tabel 6** dan **Gambar 12**.
+
+         **Tabel 6. Besar Presentase dan Jumlah Data *Unique* Kolom Gender Dataset *Users***
+
+         | Jenis Kelamin | Jumlah Sampel | Presentase |
+         |:--:|:--:|:--:|
+         | male | 1003 | 51.4% |  
+         | female | 947 | 48.6% |  
+         
+         **Gambar 12. Visualisasi Rasio Besar Tiap Data *Unique* Kolom Gender Dataset Diet**
+
+         ![Uni Gender]()
+
+         Dari hasil di atas, jenis kelamin **Laki-laki** memiliki besar presentase lebih tinggi dibandingkan dengan jenis kelamin **Perempuan**. 
+
+         **Kolom NObeyesdad**
+
+         Tujuan dari analisis kolom ini untuk mengetahui besar presentase pada setiap jenis kategori berat badan pengguna yang sudah ada pada dataset ini. Untuk informasi besar presentase dan visualisasi datanya ditunjukkan pada **Tabel 7** dan **Gambar 13**.
+
+         **Tabel 7. Besar Presentase dan Jumlah Data *Unique* Kolom NObeyesdad Dataset *Users***
+
+         | Jenis Berat Badan | Jumlah Sampel | Presentase |
+         |:--:|:--:|:--:|
+         | obesity_type_iii | 323 | 16.6% |  
+         | obesity_type_i | 283 | 14.5% |
+         | normal_weight | 280 | 14.4% |
+         | overweight_level_i | 271 | 13.9% |
+         | insufficient_weight | 271 | 13.9% |
+         | obesity_type_ii | 268 | 13.7% |
+         | overweight_level_ii | 254 | 13.0% |
+
+         **Gambar 13. Visualisasi Rasio Besar Tiap Data *Unique* Kolom NObeyesdad Dataset Diet**
+
+         ![Uni NObeyesdad]()
+
+         Dari hasil di atas, jenis berat badan **tipe obesitas 3** memiliki presentase tertinggi dengan disusul jenis berat badan lainnya. Presentase paling rendah ada pada **tipe obesitas 2**.
+
+         **Kolom family_history_with_overweight**
+
+         Tujuan dari analisis kolom ini untuk mengetahui besar presentase pada setiap kategori pengguna dengan keturunan obesitas dan yang tidak memiliki keturunan obesitas. Untuk informasi besar presentase dan visualisasi datanya ditunjukkan pada **Tabel 8** dan **Gambar 14**.
+
+         | Pengguna Dengan Keturunan Obesitas | Jumlah Sampel | Presentase |
+         |:--:|:--:|:--:|
+         | Ya | 1578 | 80.9% |  
+         | Tidak | 372 | 19.1% |  
+
+         **Gambar 14. Visualisasi Rasio Besar Tiap Data *Unique* Kolom family_history_with_overweight Dataset Diet**
+
+         ![Uni family_history_with_overweight]()
+
+         Dari hasil di atas, **pengguna dengan keturunan obesitas** memiliki presentase lebih tinggi daripada **pengguna tidak memiliki keturunan obesitas**.
+
+      **Kolom Numerikal**
+       
+       Tujuan dari analisis ini untuk melihat distribusi umum data yang ada pada dataset ini setelah melalui proses **Univariate Analysis**. Dataset sudah dilakukan pembersihan *missing value*, *invalid value*, dan juga *outliers value*.
+
+         - Dataset Diet
+
+            **Gambar 14. Visualisasi Distribusi Data Kolom Numerikal Dataset Diet**
+
+            ![Uni Numerical]()
+
+            Dari hasil pemetaan dengan visualisasi data pada **Gambar 14**, dapat disimpulkan bahwa:
+            1. Kolom Protein(g)
+               - Persebaran data cenderung ke kanan (*Right-Skewed*)
+               - Banyak data terbanyak ada di angka 10
+               - Banyak data terendah ada di kisaran angka 150 - 175
+
+            2. Kolom Carbs(g)
+               - Persebaran data cenderung ke kanan (*Right-Skewed*)
+               - Banyak data terbanyak ada di angka 20
+               - Banyak data terendah ada di kisaran angka 300 - 350
+
+            3. Kolom Fat(g)
+               - Persebaran data cenderung ke kanan (*Right-Skewed*)
+               - Banyak data terbanyak ada di angka 10
+               - Banyak data terendah ada di kisaran angka 200 - 250
+        
+         - Dataset *Users*
+
+            **Gambar 15. Visualisasi Distribusi Data Kolom Numerikal Dataset *Users***
+            
+            ![Uni Numerical]()
+
+            Dari hasil pemetaan dengan visualisasi data pada **Gambar 15**, dapat disimpulkan bahwa:
+
+            1. Kolom BMI
+               - Pada kolom BMI persebaran banyak data cenderung rata. Dengan perolehan banyak data terbanyak ada di kisaran angka 18.
+               - Banyak BMI terendah ada di angka 50.
+            2. Kolom Weight
+               - Pada kolom Weight persebaran banyak data cenderung miring ke kanan (*right-skewed*). Dengan perolehan banyak data terbanyak ada di kisaran angka 50 dan 80.
+                - Banyak angka terendah ada di kisaran angka 140 - 160.
+            3. Kolom Age
+               - Pada kolom Age persebaran banyak data cenderung miring ke kanan (*right-skewed*). 
+               - Banyak data terbanyak ada pada angka 21.
+               - Banyak data terendah ada di kisaran angka 28 - 35.
