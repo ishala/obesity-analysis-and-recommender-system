@@ -430,7 +430,8 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
          **Gambar 10. Visualisasi Rasio Besar Tiap Data *Unique* Kolom Diet_type Dataset Diet** 
 
-         ![Uni Diet_type]()
+         ![Uni Diet_type](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/b40a757c-0f36-454f-994f-9b6ae748cb67)
+
 
          Dari hasil di atas, tipe diet **mediterranean** memiliki besar presentase tertinggi dibandingkan data lainnya. Dengan jenis **paleo** memiliki presentase paling sedikit.
 
@@ -450,7 +451,8 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
          **Gambar 11. Visualisasi Rasio Besar Tiap Data *Unique* Kolom Cuisine_type Dataset Diet** 
 
-         ![Uni Cuisine_type]()
+         ![Uni Cuisine_type](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/370736f1-8050-42db-bd45-3eb1f86456c0)
+
 
          Dari hasil di atas, jenis makanan **american** memiliki besar presentase tertinggi dibandingkan dengan data lainnya. Dengan jenis **others** menjadi urutan paling akhir. Jenis **others** merupakan hasil penjumlahan presentase jenis-jenis makanan yang memiliki presentase kurang dari 5%.
 
@@ -469,7 +471,8 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
          
          **Gambar 12. Visualisasi Rasio Besar Tiap Data *Unique* Kolom Gender Dataset Diet**
 
-         ![Uni Gender]()
+         ![Uni Gender](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/dd51c16b-f5f7-468c-85b9-0fc06c6ad886)
+
 
          Dari hasil di atas, jenis kelamin **Laki-laki** memiliki besar presentase lebih tinggi dibandingkan dengan jenis kelamin **Perempuan**. 
 
@@ -491,7 +494,8 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
          **Gambar 13. Visualisasi Rasio Besar Tiap Data *Unique* Kolom NObeyesdad Dataset Diet**
 
-         ![Uni NObeyesdad]()
+         ![Uni NObeyesdad](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/aab9b422-cdf5-4a62-b56b-c3661ec074dc)
+
 
          Dari hasil di atas, jenis berat badan **tipe obesitas 3** memiliki presentase tertinggi dengan disusul jenis berat badan lainnya. Presentase paling rendah ada pada **tipe obesitas 2**.
 
@@ -506,7 +510,8 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
          **Gambar 14. Visualisasi Rasio Besar Tiap Data *Unique* Kolom family_history_with_overweight Dataset Diet**
 
-         ![Uni family_history_with_overweight]()
+         ![Uni family_history_with_overweight](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/4f11bac0-e7ff-4cdd-a37c-99df78b7c56f)
+
 
          Dari hasil di atas, **pengguna dengan keturunan obesitas** memiliki presentase lebih tinggi daripada **pengguna tidak memiliki keturunan obesitas**.
 
@@ -518,7 +523,8 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
             **Gambar 14. Visualisasi Distribusi Data Kolom Numerikal Dataset Diet**
 
-            ![Uni Numerical]()
+            ![Uni Numerical](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/9436e8b3-103a-425f-abf2-33c38a4c9e73)
+
 
             Dari hasil pemetaan dengan visualisasi data pada **Gambar 14**, dapat disimpulkan bahwa:
             1. Kolom Protein(g)
@@ -540,7 +546,8 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
             **Gambar 15. Visualisasi Distribusi Data Kolom Numerikal Dataset *Users***
             
-            ![Uni Numerical]()
+            ![Uni Numerical](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/975a987c-3b38-43dc-a5cd-36f08c8c4a0e)
+
 
             Dari hasil pemetaan dengan visualisasi data pada **Gambar 15**, dapat disimpulkan bahwa:
 
