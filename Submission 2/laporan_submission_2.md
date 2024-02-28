@@ -561,3 +561,49 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
                - Pada kolom Age persebaran banyak data cenderung miring ke kanan (*right-skewed*). 
                - Banyak data terbanyak ada pada angka 21.
                - Banyak data terendah ada di kisaran angka 28 - 35.
+
+# Data Preparation
+
+Pada tahap ini, langkah yang dilakukan adalah untuk mempersiapkan data sebelum dilakukan tahap *modeling*. Tujuannya adalah agar mengetahui kekurangan data, memperbaiki data, serta merekonstruksi penataan data agar lebih mudah untuk digunakan baik oleh pengguna maupun pengolah. Untuk detail langkah-langkah yang dilakukan adalah sebagai berikut:
+
+## Pengecekan dan Penyimpulan *Missing Value* Ulang
+
+Langkah ini dilakukan untuk memeriksa ulang data yang sudah beberapa kali dilakukan langkah-langkah sebelumnya dan memastikan tidak ada data *null* yang tersisa sebelum dilakukan tahap selanjutnya. Hal ini bertujuan agar tidak memunculkan data kosong ketika akan direkomendasikan. Selain itu juga mencegah model mengidentifikasi nilai *null* sebagai sebuah data.
+
+Dari hasil pemeriksaan kedua dataset, baik **data diet** dan **data *users*** sudah tidak terdapat data null yang tersisa. 
+
+## Mengurutkan Data Berdasarkan Kategori Tertentu
+
+Langkah ini dilakukan untuk merapikan urutan data berdasarkan fitur yang dipilih. Pada kali ini, fitur yang dipilih merupakan fitur yang mengandung data unik dan utama untuk dilakukan perekomendasian.
+
+### Data Diet
+
+Pada dataset ini, diurutkan berdasarkan tipe diet dan jenis masakan. Hal ini bertujuan agar nantinya ketika dilakukan perekomendasian, pengguna akan mudah mencari tipe diet yang mereka cari. Selain itu, jika pengguna ingin mencari jenis masakan tertentu, akan lebih mudah jika diurutkan. Keduanya diurutkan berdasarkan abjad dari abjad paling awal hingga paling akhir.
+
+Selain itu, nantinya akan memudahkan dalam model mencari nilai *similarity*, karena data sudah tidak terlalu acak pada metode *Content-based Filtering*.
+
+### Data *Users*
+
+Pada dataset ini, diurutkan berdasarkan tipe obesitas pengguna. Hal ini bertujuan agar memudahkan pengolah dan pengguna dalam mencari data pengguna berdasarkan tipe obesitas yang sama, berdasarkan karakteristik-karakteristik lain yang tersedia. Pengurutan berdasarkan abjad dari yang paling awal hingga paling akhir.
+
+Pengurutan juga mempermudah model dalam melakukan perekomendasian dengan metode *User-based Filtering*.
+
+## Pengecekan dan Penyimpulan Data Duplikat
+
+Langkah ini dilakukan untuk menghilangkan data yang diidentifikasi sebagai duplikasi dari data lainnya setelah proses pengurutan. Hal ini bertujuan agar data yang dibawa nanti pada model adalah data-data unik.
+
+### Data Diet
+
+Pada dataset diet, pengecekan dilakukan pada resep masakan. Hal ini bertujuan agar tidak terdapat lebih dari satu data resep yang sama pada jenis masakan atau tipe diet yang berbeda. Dengan begitu tidak terdapat redundansi data yang terjadi.
+
+Setelah dilakukan pengecekan, ternyata memang terdapat data duplikasi pada fitur itu. Selanjutnya adalah melakukan penghapusan data duplikat.
+
+### Data *Users*
+
+Pada dataset *users*, pengecekan dilakukan pada fitur id. Hal ini bertujuan agar tidak terdapat redundansi data pengguna yang sama. Dengan begitu, perekomendasian metode *User-based Filtering* dapat bekerja dengan baik.
+
+Setelah dilakukan pengecekan, ternyata sudah tidak ada data pengguna yang terduplikasi. Maka dapat dilanjutkan pada langkah selanjutnya.
+
+## Rekonstruksi Urutan Kolom
+
+Langkah ini dilakukan untuk mengubah tatanan kolom pada setiap dataset yang ada. Penataan ulang ini bertujuan agar data lebih rapi, konsisten, dan terurut berdasarkan fitur penting yang direkomendasikan. Pengubahan nama kolom yang tidak konsisten menjadi salah satu langkah yang dilakukan.
