@@ -1,4 +1,4 @@
-# Laporan Proyek Machine Learning: Rekomendasi Jenis Diet dan Resep Makanan 
+# Laporan Proyek Machine Learning: Rekomendasi Jenis Diet Berdasarkan Tipe Berat Badan
 
 # Nama : Muhammad Faishal Ali Dhiaulhaq
 
@@ -15,7 +15,7 @@ Maka dari itu, perlu penyeimbang dalam setiap makanan yang kita konsumsi dengan 
 1. Diet tidak menakutkan seperti operasi.
 2. Diet memiliki fungsi sebagai langkah preventif selain kuratif.
 
-Maka dari itu, perlu untuk menelaah tipe diet yang sesuai pada kondisi tubuh berdasarkan jenis makanan yang sesuai. 
+Maka dari itu, perlu untuk menelaah tipe diet yang sesuai pada kondisi tubuh berdasarkan jenis makanan dan tipe berat badan yang sesuai. 
 
 ## Ringkasan Tujuan Proyek
 Dari pemaparan informasi di atas, maka perlu pengadaan suatu alat atau media untuk menyarankan masyarakat agar mengerti apa saja jenis makanan dengan resep-resep yang benar. Proses penyaranan ini menggunakan **teknik atau sistem rekomendasi** yang merekomendasikan jenis-jenis diet beserta contoh resep makanan. 
@@ -31,7 +31,7 @@ Referensi:
   <u>[Diet Sebagai Keseimbangan Hidup](https://jurnaldekonstruksi.id/index.php/dekonstruksi/article/view/195/148)</u>
 
 # Business Understanding
-Proyek ini dibuat untuk memberikan media berbasis sistem rekomendasi untuk masyarakat dalam memilih jenis makanan berdasarkan tipe diet yang dipilih dengan pertimbangan profil demografis masyarakat.
+Proyek ini dibuat untuk memberikan media berbasis sistem rekomendasi untuk masyarakat dalam memilih jenis makanan berdasarkan tipe diet dan tipe berat badan masyarakat.
 
 ## Problem Statements
 
@@ -224,13 +224,14 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
    Pada tahap ini, terdapat dua langkah yang dilakukan, yaitu:
    1. Menghapus data duplikat pada dataset diet.
-   2. Mengubah tipe data kolom **Weight** pada dataset *users*.
+   2. Mengubah tiap kalimat pada fitur **Recipe_name**, menjadi terkapitalisasi pada setiap awal kata
+   3. Mengubah tipe data kolom **Weight** pada dataset *users*.
    
    ### Exploratory Data Analysis (EDA)
 
    Pada proses ini, terdapat beberapa langkah yang dilakukan. Tujuannya adalah memudahkan untuk mengenali dataset dengan pengelompokan dan penyajian secara visual. Berikut detailnya:
 
-   1. Menghapus Kolom yang Tidak Perlu
+   4. Menghapus Kolom yang Tidak Perlu
       
       Tahap ini bertujuan untuk mengurangi dimensi dataset tidak terlalu besar, dengan begitu dataset dapat dimuat lebih cepat dan ringan.
 
@@ -256,7 +257,7 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
          - NObeyesdad
          - family_history_with_overweight
   
-   2. Pencarian Invalid dan Missing Value Lanjutan
+   5. Pencarian Invalid dan Missing Value Lanjutan
 
       Pada tahap ini dilakukan pemeriksaan nilai-nilai yang tidak sesuai dengan tujuan analisis. 
 
@@ -276,7 +277,7 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
          Setelah langkah-langkah di atas, dapat disimpulkan bahwa **dataset *users*** sudah bersih dan siap diproses pada langkah selanjutnya.
    
-   3. Pencarian Nilai *Outliers*
+   6. Pencarian Nilai *Outliers*
 
       Pada proses ini, terdapat beberapa langkah untuk mengidentifikasi nilai *outliers* pada setiap kolom numerik yang akan digunakan untuk fitur-fitur *modelling*. Sebab, jika tidak dibersihkan akan memberikan kualitas data dan model yang tidak maksimal.
 
@@ -503,6 +504,8 @@ Pada bagian ini. akan memberikan informasi terkait data yang digunakan untuk ana
 
          Tujuan dari analisis kolom ini untuk mengetahui besar presentase pada setiap kategori pengguna dengan keturunan obesitas dan yang tidak memiliki keturunan obesitas. Untuk informasi besar presentase dan visualisasi datanya ditunjukkan pada **Tabel 8** dan **Gambar 14**.
 
+         **Tabel 8. Besar Presentase dan Jumlah Data *Unique* Kolom Riwayat Keluarga Obesitas Dataset *Users***
+
          | Pengguna Dengan Keturunan Obesitas | Jumlah Sampel | Presentase |
          |:--:|:--:|:--:|
          | Ya | 1578 | 80.9% |  
@@ -606,4 +609,30 @@ Setelah dilakukan pengecekan, ternyata sudah tidak ada data pengguna yang terdup
 
 ## Rekonstruksi Urutan Kolom
 
-Langkah ini dilakukan untuk mengubah tatanan kolom pada setiap dataset yang ada. Penataan ulang ini bertujuan agar data lebih rapi, konsisten, dan terurut berdasarkan fitur penting yang direkomendasikan. Pengubahan nama kolom yang tidak konsisten menjadi salah satu langkah yang dilakukan.
+Langkah ini dilakukan untuk mengubah tatanan kolom pada setiap dataset yang ada. Penataan ulang ini bertujuan agar data lebih rapi, konsisten, dan terurut berdasarkan fitur penting yang direkomendasikan. Pengubahan nama kolom yang tidak konsisten menjadi salah satu langkah yang dilakukan. 
+
+Selain itu, juga menambahkan sebuah fitur baru pada data diet, yaitu fitur **fitur_tfidf** sebagai target pencarian *vector similarity* dalam metode *Content-based Filtering*. Isi dari fitur ini merupakan gabungan dari fitur-fitur penting di dalam data diet, yaitu tipe diet, jenis masakan, dan resep masakan.
+
+# Modeling and Result
+
+Setelah melakukan banyak tahap untuk mempersiapkan data-data yang ada menjadi data yang siap untuk dilakukan proses rekomendasi, maka pada tahap ini saatnya untuk menguji apakah data-data tersebut seharusnya memberikan hasil yang diharapkan. Algoritma yang dibuat ada dua macam, yaitu *Content-based Filtering* dan *User-based Filtering*.
+
+## *Content-based Filtering*
+
+Algoritma ini akan merekomendasikan tipe diet, jenis masakan, dan resepnya. Informasi lainnya yaitu nilai-nilai gizi seperti kandungan protein, lemak, dan karbohidrat yang cocok untuk pengguna yang merasa kebingungan dalam menentukan resep masakan jika sedang menjalani proses diet tertentu. 
+
+Selain tujuan penyelesaian masalah di atas, juga algoritma *Content-based Filtering* ampuh dalam mengatasi fenomena *cold start* yang mana sistem masih belum ada data preferensi dari pengguna. Cara kerjanya mirip seperti algoritma *searching* biasa, namun yang digunakan bukan kerelatif-samaan karakternya, melainkan nilai vektor yang merepresentasikan data itu dengan data-data lainnya. Penghitungan vektor menggunakan fungsi dari **scikit-learn** yaitu *cosine similarity*.
+
+Hasil dari algoritma ini adalah data-data ***Top-N*** berdasarkan indeks teratas hasil pencarian. Disini nilai **n** yang digunakan adalah 5. Maka yang muncul adalah 5 data paling cocok teratas dari hasil inputan pengguna. Inputan yang dimaksud adalah nama tipe diet dan jenis masakan yang pengguna ingin cari. Untuk hasil dari rekomendasi ditunjukkan pada **Tabel 9**.
+
+**Tabel 9. Hasil Top 5 Rekomendasi Tipe Diet dan Jenis Masakan**
+
+| tipe_diet | tipe_masakan | resep_masakan | kadar_protein | kadar_karbo | kadar_lemak |
+|:--:|:--:|:--:|:--:|:--:|:--:|
+| dash | american | Grilled Chicken | 148.38 | 57.14 | 79.00 |
+| dash | american | Cauliflower Soup | 26.69 | 18.64 | 34.75 |
+| dash | american | Bread Salad | 44.09 | 153.84 | 86.03 |
+| dash | american | Baked Chicken | 108.97 | 0.86 | 48.36 |
+| dash | american | Pumpkin Soup | 56.71 | 299.68 | 69.76 |
+
+Pada studi kasus di atas, pengguna menginputkan tipe diet **dash** dan tipe masakan **american**. Maka yang muncul adalah data dengan nilai kemiripan teratas yang ada pada matriks vektor **fitur_tfidf**.
