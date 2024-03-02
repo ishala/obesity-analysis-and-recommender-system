@@ -1,4 +1,4 @@
-# Laporan Proyek Machine Learning: Rekomendasi Jenis Diet Berdasarkan Tipe Berat Badan
+# Laporan Proyek Machine Learning: Rekomendasi Resep Makanan Untuk Diet Berdasarkan Data Demografis Masyarakat
 
 # Nama : Muhammad Faishal Ali Dhiaulhaq
 
