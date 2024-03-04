@@ -60,7 +60,7 @@ Proyek ini dibuat untuk memberikan media berbasis sistem rekomendasi untuk masya
 3. Membuat model sistem rekomendasi sebagai berikut:
 
    - *Content-Based Filtering*
-      
+
       Pada model ini, data yang digunakan berasal dari **dataset diet** yang sudah terstruktur dan *model-friendly*. Hasil dari model ini yaitu rekomendasi tipe-tipe diet dengan informasi lainnya. Tujuan hasil dari model ini untuk mengatasi kondisi *Cold Start* di awal sistem dimulai.
 
    - *User-Based Filtering* 
@@ -636,3 +636,188 @@ Hasil dari algoritma ini adalah data-data ***Top-N*** berdasarkan indeks teratas
 | dash | american | Pumpkin Soup | 56.71 | 299.68 | 69.76 |
 
 Pada studi kasus di atas, pengguna menginputkan tipe diet **dash** dan tipe masakan **american**. Maka yang muncul adalah data dengan nilai kemiripan teratas yang ada pada matriks vektor **fitur_tfidf**.
+
+## *User-based Filtering (Collaborative Filtering)*
+
+Algoritma ini akan sama dengan algoritma *Content-based Filtering* sebelumnya, yaitu menampilkan rekomendasi tipe diet dan makanan beserta nilai-nilai gizi yang terkandung seperti kandungan protein, lemak, dan karbohidrat. Yang membedakan adalah bagaimana algoritma ini bekerja.
+
+Model ini memuat data masyarakat pengguna yang berisi data-data demografis seperti usia, berat badan, *Body Mass Index* (BMI). Setiap pengguna memiliki penilaian masing-masing terhadap tipe-tipe diet. Penilaian juga termasuk penilaian pada resep-resep makanan yang dipilih sesuai dengan tipe dietnya. Penentuan rekomendasi berdasarkan perhitungan prediksi *rating* dari setiap data-data *rating* yang sudah ada dan sudah dilatih. Nilai rating digunakan pada inputan **y** atau biasa disebut fitur target. Lalu, untuk inputan **x** menggunakan 2 fitur yaitu **id data diet** dan **id data pengguna** yang merupakan representasi detail setiap data di kedua dataset itu.
+
+Hasil dari model ini akan menampilkan data-data ***Top-N*** dari hasil pengurutan setelah melakukan prediksi rating dari terbesar hingga terkecil. Nilai **N** yang digunakan adalah 5. Yang ditampilkan adalah data rekomendasi tipe diet dan resep-resep makanan sesuai dengan preferensi pengguna,dilihat dari nilai *rating* yang diberikan.
+
+Pada pengembangannya, terbagi menjadi beberapa langkah dengan detail sebagai berikut:
+
+### Membuat Preferensi *Rating*
+Pada tahap ini, dilakukan pengumpulan data *rating* dari setiap pengguna. Sebenarnya, pada dataset asli tidak terdapat data *rating*, namun disini dilakukan pendekatan *random sampling* secara *dummy* pada setiap data pengguna. Terdapat beberapa langkah yang dilakukan dengan detail sebagai berikut:
+
+1. Mengambil Data *User* Selain Yang Kekurangan Berat Badan 
+
+Pada langkah ini, dilakukan penyaringan data pengguna yang cocok untuk dipasangkan dengan data diet. Yaitu pemilihan tipe berat badan yang biasanya memilih untuk melakukan diet. Disini menghapus data pengguna dengan tipe berat badan yang teridentifikasi **kekurangan berat badan**.
+
+Sebab, pengguna-pengguna ini perlu untuk menambah kalori agar berat badannya justru meningkat.
+
+2. Mengambil Data Setiap Tipe Berat Badan
+
+Pada langkah ini, dilakukan pengambilan data-data tipe berat badan pengguna. Pengambilan tidak dilakukan pada keseluruhan jumlah keseluruhan setiap nilai uniknya, melainkan **hanya 20%** dari setiap nilai unik. Tujuannya agar pilihan pengguna lebih beragam dan lebih baik lagi ketika dilakukan *training model*.
+
+Setelah diambil datanya dari setiap nilai unik, selanjutnya adalah penggabungan seluruh data itu.
+
+3. Menyebarkan ID *Users* ke Data Diet
+
+Pada langkah ini, dilakukan penyebaran data Id dari setiap pengguna ke data diet. Tujuannya agar nantinya dapat memasukkan data *dummy rating* ke data diet yang sudah ada data penggunanya. Dengan begitu akan dapat memperingkas dataset yang digunakan dan proses *merging* data tipe berat badan dapat dilakukan berdasarkan id pengguna.
+
+4. Membuat Data *Rating*
+
+Disini, *rating* yang digunakan hanya angka dengan *range* 1 sampai 5. Peletakan setiap nilai *rating* pada setiap data pengguna juga dilakukan secara *random choice*.
+
+5. Menambahkan Tipe Berat Badan
+
+Setelah data id pengguna ditambahkan ke data diet, maka selanjutnya dapat dilakukan *merging* data diet dengan data pengguna. Data yang diambil sebagai data baru adalah data tipe berat badan pengguna. Sebab, data ini nantinya akan dijadikan data preferensi pengguna yang akan diwakilkan oleh data id pengguna.
+
+6. Encoding Fitur Kategorikal
+
+Sebab dari tujuan utama adalah merekomendasikan tipe-tipe diet beserta resep-resep makanan berdasarkan preferensi tipe berat badan pengguna. Maka perlu melakukan *encoding* pada kategori-kategori diet. Tujuannya agar dapat dimasukkan ke dalam model sebagai parameter x. Model tidak dapat memroses data karakter, melainkan harus dalam bentuk angka.
+
+7. Cek Informasi Dataset Saat Ini
+
+Pengecekan informasi dari dataset yang akan digunakan bertujuan untuk memastikan bahwa data sudah baik dan dapat dilanjutkan dalam proses selanjutnya. Pada langkah ini juga terdapat penghapusan simbol koma pada id pengguna. Tanda koma ini awalnya merupakan penanda bahwa angka tersebut ribuan. 
+
+### Membagi Data Untuk *Training* dan *Validation*
+
+Setelah dataset dirasa sudah baik, maka selanjutnya adalah membaginya menjadi data *training* dan *validation*. Data *training* merupakan data inti sebagai bahan latih model, sedangkan data *validation* merupakan data lain diluar pada data *training* sebagai validasi hasil pemrosesan data apakah hasilnya dapat dengan baik untuk memprediksi. 
+
+Pada tahap ini, terdapat beberapa langkah dengan detail sebagai berikut:
+
+1. Mengacak Data
+   
+Pengacakan data dilakukan agar urutan data latih dapat beragam. Namun, pengacakan harus dilakukan dengan proposisi yang tetap. Realisasinya dapat dilakukan dengan penerapan parameter *random state* di fungsi *sample*. 
+
+2. Membagi Data
+
+Seperti pada tujuan awal, parameter x pada model akan diisi dengan data tipe diet dan data id pengguna. Lalu, parameter y akan diisi dengan data *rating* sebagai target prediksi.
+
+Lalu, pengambilan data *training* hanya diambil **80%** dari jumlah keseluruhan data dan sisanya digunakan untuk data validasi sebesar 20%.
+
+### Proses Training
+
+Selanjutnya adalah membuat model yang akan melakukan prediksi *rating*. Model menggunakan teknik regresi menggunakan *Neural Network* untuk proses *Deep Learning* pada *library* **Tensorflow**. 
+
+Model terdiri dari beberapa lapisan yang disebut *layer*. Untuk *layer* terbagi menjadi ***input layer***, ***hidden layer***, dan ***fully connected layer (output layer)***. Untuk detail penjelasannya adalah sebagai berikut:
+
+1. *Input Layer*
+
+   Untuk *input layer*, dibuat menjadi 2 masukan yang akan diisi oleh data tipe diet yang sudah di *encoding* dan id pengguna. Ukuran inputan yaitu 1 dimensi, ditandai dengan penggunaan parameter *shape* dengan isian angka 1. Hal ini dilakukan baik pada data tipe diet maupun data id pengguna.
+
+2. *Hidden Layer*
+   
+   Sedangkan *hidden layer* diisi dengan lapisan-lapisan *embedding* yang akan memetakan nilai diskrit menjadi vektor kontinyu berdimensi lebih rendah untuk mencari representasi yang lebih baik dari data kategorikal.
+
+   Lalu untuk ukurannya disesuaikan dengan ukuran data *input* atau biasa disebut ukuran *vocabulary*. *Layer Embedding* diisi dengan angka 16 yang artinya nilai dimensi vektor yang dihasilkan adalah 16 dimensi. 
+
+   Selanjutnya adalah melakukan inisialisasi pada nilai *embedding* agar dapat memroses data lebih baik dalam jaringan saraf (*Neural Network*). Hal ini ditandai dengan penambahan *initializer* menggunakan **he_normal**.
+
+   Selanjutnya adalah memberikan sejumlah penalti kecil pada data agar tidak terjadi overfitting dengan menggunakan *regularizers*.
+
+   Yang terakhir adalah memasangkan *input layer* yang sudah dibuat sebelumnya. Setelah memasangkan *input layer*, dilanjutkan dengan melakukan *flatten*. Hal ini berguna agar angka-angka dengan dimensi di atas 1 pada *layer embedding*, dikembalikan pada dimensi 1 untuk dilakukan proses *dot product*. Langkah-langkah di atas diterapkan baik dari sisi data tipe diet maupun id pengguna. Untuk rumus dari *dot product* adalah sebagai berikut:
+
+   $\vec{a} \cdot \vec{b}$ = $\sum\limits_{i=1}^n a_i \cdot b_i$
+
+   Dengan penjelasan sebagai berikut;
+   
+   $\vec{a}$ : Vektor masukan pertama, pada kasus ini yaitu tipe diet.
+
+   $\vec{b}$ : Vektor masukan kedua, pada kasus ini yaitu id pengguna.
+
+   $\sum\limits_{i=1}^n a_i \cdot b_i$ = Penjumlahan pada angka $i$ sebanyak $n$ pada setiap hasil perkalian dot kedua vektor $a$ dan $b$.
+
+   Rumus di atas diterapkan pada *layer dot* yang ditambahkan pada arsitektur model. *Layer* ini menghitung vektor-vektor data yang jadi masukan.
+
+3. *Fully Connected Layer*
+
+   Setelah mendapatkan nilai hasil *dot product*, yang dilakukan adalah mengubah hasil tersebut menjadi *fully  connected neural* dengan satu *unit output* yang merupakan data *rating* hasil prediksi. Hasil ini diperoleh menggunakan aktivasi **ReLU (*Rectified Linear Unit*)** yang memperkenalkan non-linearitas ke dalam model.
+
+Setelah arsitektur model dibuat, selanjutnya adalah melakukan kompilasi model tersebut dengan beberapa *hyperparameter*. Untuk detailnya adalah sebagai berikut:
+
+1. *Loss Function*
+   
+   Pada proses *training* di model ini, menggunakan *loss function* **Mean Squared Error (MSE)**. Fungsi ini akan mengukur seberapa besar perbedaan antara nilai hasil prediksi dengan nilai sebenarnya. Semakin kecil hasilnya, semakin baik model dalam memprediksi nilai. Rumus dari MSE adalah sebagai berikut : 
+
+   MSE = $\frac{1}{n}\sum\limits_{i=1}^n (y_i - \hat{y}_i)^2$
+
+   Dengan penjelasan sebagai berikut:
+
+   $\frac{1}{n}\sum\limits_{i=1}^n$ : Pembagian angka 1 dengan jumlah observasi dalam dataset. Penjumlahan dilakukan secara iteratif dari angka 1.
+   
+   $\text{y}_i$ : nilai sebenarnya ke-${i}$
+   
+   $\hat{y}_i$ : nilai hasil prediksi ke-${i}$
+
+2. *Optimizer Function*
+   
+   Fungsi ini akan mengoptimalkan bobot (*weights*) model selama pelatihan (*training*). Untuk laju loncatan pembelajaran (*learning rate*) diatur sebesar **0,001** atau **1e-3**. Dengan learning rate sebesar itu, laju pembelajaran akan normal. Tidak terlalu dekat dan tidak terlalu jauh, maka model akan lebih efektif dalam mengambil jarak data yang dipelajari. Untuk metode pembelajarannya juga menggunakan **Adam (*Adaptive Moment Estimation*)** yang dapat dengan mudah beradaptasi pada setiap parameter model dan dapat mengoreksi bias pada momen-momen pembelajaran.
+
+3. *Metric Function*
+
+   Fungsi ini akan merekam hasil setiap *epochs* pembelajaran terjadi. Sebab menggunakan metrik MSE, maka disini juga menggunakan nilai MSE yang akan dipantau yang nantinya akan ditampilkan setelah proses *training* selesai.
+
+Setelah proses kompilasi selesai, selanjutnya adalah melakukan *training*. Proses *training* dilakukan pada dua data, yaitu data **x** dan **y**. Untuk data x, disesuaikan dengan arsitektur model yang sudah dibuat. Maka perlu dilakukan pemisahan *input*, yang dibungkus dalam bentuk sebuah *list*. Data x pertama adalah tipe diet, dan yang kedua adalah data id pengguna pada **x train**. Selanjutnya, pada data y dimasukkan data **y train** yang merupakan data *ratings*. 
+
+Disini juga menggunakan beberapa *parameter* model, dengan detail sebagai berikut:
+
+1. Batch Size
+   
+   Parameter ini fungsinya untuk mendeklarasikan proporsi data yang dilakukan *training* pada setiap perulangannya. Disini menggunakan angka **8** sebagai ukuran *batch*-nya.
+
+2. Epochs
+
+   Parameter ini fungsinya untuk mendeklarasikan banyak perulangan pada proses *training* yang dilakukan. Disini menggunakan angka 10 yang menandakan bahwa proses *training* dilakukan sebanyak **10** kali putaran.
+
+Selain melakukan proses *training*, juga dilakukan proses validasi. Proses validasi bertujuan agar memastikan bahwa model dapat belajar dengan data baru di luar data *training*. Untuk jenis data yang digunakan sama dengan data x dan y pada data *training*. Yang membedakan adalah sumber datanya. Di fase ini, data diambil dari hasil pemisahan data *training* dan *validation* pada tahap sebelumnya. Data diambil dari data *validation*.
+
+### Mendapatkan Rekomendasi Tipe Diet Berdasarkan Data Pengguna
+
+Setelah proses *training* dan *validation* selesai, saatnya untuk menguji model dalam memberikan rekomendasi tipe diet berdasarkan data pengguna. Untuk mengujinya, disini dilakukan pemilihan id pengguna saja secara acak dari data umum. Lalu dilakukan penyaringan data dari keseluruhan data dan diambil data yang memiliki id pengguna selain id pengguna yang sudah kita pilih sebelumnya. Tujuannya adalah untuk memastikan bahwa pilihan data yang diprediksi benar-benar belum pernah diambil oleh pengguna ini. 
+
+Selanjutnya adalah proses *encoding* data kategorikal yaitu tipe diet. Sebab, data diambil dari sumber data yang belum dilakukan proses *encoding* pada data tipe diet. Setelah itu dilakukan prediksi nilai *rating* berdasarkan preferensi pengguna yang terwakilkan oleh nilai id pengguna dengan data-data diet yang belum pernah diambil oleh pengguna ini.
+
+Setelah melakukan proses prediksi, maka dilakukan penyajian hasil rekomendasi. Hasil rekomendasi diambil urutan 5 teratas setelah pengurutan indeks hasil-hasil prediksi dari yang terbesar ke terkecil. Setelah itu dilakukan penyajian hasil rekomendasi dalam bentuk ***Dataframe***. Contoh hasil rekomendasi ditunjukkan pada **Tabel 10**.
+
+Tabel 10. Hasil Rekomendasi Tipe Diet Beserta Informasi Lainnya
+
+| id_diet | tipe_diet | tipe_masakan | resep_masakan | kadar_protein | kadar_karbo | kadar_lemak |
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| 3730 | paleo | american | Fluffy Paleo Cauliflower Mash | 16.37 | 41.77 | 25.39 |
+| 3921 | paleo | french | Healthy Chocolate Truffles Recipes | 19.39 | 113.88 | 103.46 |
+| 3925 | paleo | french | Dark & Stormy Date Caramels | 34.02 | 119.10 | 137.32 |
+| 3926 | paleo | french | Paleo Lemon Tarts | 38.77 | 126.10 | 64.78 |
+| 3927 | paleo | french | Healthy Coconut Meringue Parfait Recipes | 63.04 | 161.99 | 13.34 |
+
+## Kelebihan dan Kekurangan Setiap Algoritma
+
+Setelah mengimplementasikan kedua algoritma, baik *Content-based Filtering* dan *Collaborative Filtering*, terdapat kelebihan dan kekurangan dari masing-masing algoritma. Berikut adalah detailnya:
+
+### Content-based Filtering
+
+**Kelebihan**
+- Dapat dengan mudah menangani item baru, karena rekomendasi didasarkan pada fitur atau konten dari item tersebut.
+- Dapat memberikan rekomendasi yang dapat dimengerti oleh pengguna dengan mudah, karena didasarkan oleh fitur atau atribut yang spesifik dari item.
+- Tidak memerlukan data atau informasi dari pengguna yang sudah ada sebagai acuan, karena informasi diambil dari hasil ekstraksi nilai-nilai dari item itu sendiri dengan item lainnya
+
+**Kekurangan**
+- Kesulitan dalam menangani preferensi pengguna yang kompleks dan sering berubah seiring bertambahnya pengguna, karena tidak ada data pengguna yang dikaitkan dalam proses perekomendasian dengan algoritma ini.
+- Ketergantungan pada kualitas fitur atau atribut yang digunakan dalam mendeskripsikan item. Jika fitur tidak mewakili item dengan baik, maka kualitas rekomendasi dapat menurun.
+- Cenderung memberikan rekomendasi yang serupa dengan item yang telah disukai atau pernah dipilih oleh pengguna, maka hasil rekomendasi akan tidak terlalu bervariasi.
+
+### Collaborative Filtering
+
+**Kelebihan**
+- Dapat menangani data preferensi pengguna yag kompleks, dengan cara menemukan pola yang mungkin sulit ditemukan oleh metode lain.
+- Tidak memerlukan pengetahuan tentang item, hanya cukup dengan data perwakilan antara data item dan data pengguna.
+- Memberikan rekomendasi yang lebih ke arah personal berdasarkan pola yang diciptakan dari preferensi pengguna.
+
+**Kekurangan**
+- Terjadi kondisi *Cold Start*, yaitu kondisi dimana item adalah item baru dan pengguna adalah pengguna baru. Maka, tidak ditemukan data preferensi yang sesuai dengan item yang akan direkomendasikan.
+- Tidak dapat memberikan rekomendasi yang akurat jika data pengguna ke item masih sangat jarang. Sebab, cakupan informasi data masih belum terlalu cenderung pada salah satu sifat pengguna yang bersangkutan.
+- Terdapat masalah keamanan yang berkaiatn dengan data privasi pengguna. Dengan algoritma ini, peluang untuk terjadi kebocoran data privasi pengguna sangat besar dan memiliki risiko serangan profil palsu (*profile injection attacks*).
+
+Kesimpulan dari beberapa hal yang sudah disampaikan di atas, maka perlu keseimbangan serta kehati-hatian ketika menerapkan setiap algoritma-algoritma itu sesuai dengan kebutuhan dan kesiapan dalam mengantisipasi segala kekurangannya.
