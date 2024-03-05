@@ -831,8 +831,11 @@ Metrik ini akan menghitung selisih antara nilai yang diprediksi oleh model dan n
 Hasil penerapan metrik di atas, diperoleh nilai *error* sebesar **2.1528725624084473**. Hasil tersebut cukup kecil dan menandakan bahwa model dapat bekerja dengan baik dalam memprediksi data *rating* pengguna dengan preferensi tertentu pada setiap data yang belum pernah diambil atau dilakukan pemberian *rating* oleh pengguna tersebut. Untuk bentuk visualisasi hasil *training* dengan metrik evaluasi ditunjukkan pada **Gambar 16 dan 17**.
 
 **Gambar 16. Visualisasi Hasil *Loss***
+![model-loss](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/e8ef822e-1419-44be-8717-8e91b1fe0746)
 
 **Gambar 17. Visualisasi Hasil *Mean Squared Error* (MSE)**
+![mse](https://github.com/ishala/obesity-analysis-and-recommender-system/assets/97838402/15c222e6-affc-408a-8cdb-f24a5036e2a7)
+
 
 # Conclusion
 
