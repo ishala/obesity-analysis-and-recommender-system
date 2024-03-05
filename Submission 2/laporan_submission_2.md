@@ -39,9 +39,9 @@ Proyek ini dibuat untuk memberikan media berbasis sistem rekomendasi untuk masya
    
    Masalah ini mencakup peninjauan dataset yang ada untuk melihat deskripsi, tujuan, dan informasi lainnya pada setiap kolomnya untuk dipilih menjadi pertimbangan data untuk model *Machine Learning* yang akan dibuat.
 
-2. Bagaimana algoritma *Content-Based Filtering* dan *User-Based Filtering* dapat menyimpulkan sebuah rekomendasi?
+2. Bagaimana algoritma *Content-Based Filtering* dan *User-Based Filtering (Collaborative Filtering)* dapat menyimpulkan sebuah rekomendasi?
   
-  Masalah ini mencakup cara penyajian akhir dari proses sistem itu sendiri ketika mengolah dari data mentah, data *model-friendly*, hingga data jadi untuk dikonsumsi masyarakat pengguna.
+  Masalah ini mencakup cara penyajian akhir dari proses sistem itu sendiri ketika mengolah dari data mentah, data *model-friendly*, hingga data jadi untuk dikonsumsi masyarakat pengguna dengan informasi yang dibutuhkan pengguna. 
 
 ## Goals
 
@@ -63,7 +63,7 @@ Proyek ini dibuat untuk memberikan media berbasis sistem rekomendasi untuk masya
 
       Pada model ini, data yang digunakan berasal dari **dataset diet** yang sudah terstruktur dan *model-friendly*. Hasil dari model ini yaitu rekomendasi tipe-tipe diet dengan informasi lainnya. Tujuan hasil dari model ini untuk mengatasi kondisi *Cold Start* di awal sistem dimulai.
 
-   - *User-Based Filtering* 
+   - *User-Based Filtering (Collaborative Filtering)* 
 
       Pada model ini, data yang digunakan berasal dari **dataset *users*** yang sudah terstruktur dan *model-friendly*. Hasil dari model ini yaitu data pendukung atau juga pengganti model *Content-Based Filtering*. Pergantiannya ditandai dengan algoritma yang condong merekomendasikan tipe diet berdasarkan tipe diet yang dipilih oleh orang lain dengan data demografis yang mirip.
 4. Mengintegrasikan kedua algoritma yang sudah dibuat dengan dataset-dataset yang ada, agar dapat bekerja secara bergantian sesuai dengan kondisi yang ada. Pengintegrasian menjadikan kedua algoritma di atas menjadi *Collaborative Filtering* ditambah dengan metode *matrix factorization* dan *deep learning*.
@@ -740,17 +740,7 @@ Setelah arsitektur model dibuat, selanjutnya adalah melakukan kompilasi model te
 
 1. *Loss Function*
    
-   Pada proses *training* di model ini, menggunakan *loss function* **Mean Squared Error (MSE)**. Fungsi ini akan mengukur seberapa besar perbedaan antara nilai hasil prediksi dengan nilai sebenarnya. Semakin kecil hasilnya, semakin baik model dalam memprediksi nilai. Rumus dari MSE adalah sebagai berikut : 
-
-   MSE = $\frac{1}{n}\sum\limits_{i=1}^n (y_i - \hat{y}_i)^2$
-
-   Dengan penjelasan sebagai berikut:
-
-   $\frac{1}{n}\sum\limits_{i=1}^n$ : Pembagian angka 1 dengan jumlah observasi dalam dataset. Penjumlahan dilakukan secara iteratif dari angka 1.
-   
-   $\text{y}_i$ : nilai sebenarnya ke-${i}$
-   
-   $\hat{y}_i$ : nilai hasil prediksi ke-${i}$
+   Pada proses *training* di model ini, menggunakan *loss function* **Mean Squared Error (MSE)**. Fungsi ini akan mengukur seberapa besar perbedaan antara nilai hasil prediksi dengan nilai sebenarnya. Semakin kecil hasilnya, semakin baik model dalam memprediksi nilai. 
 
 2. *Optimizer Function*
    
@@ -786,11 +776,11 @@ Tabel 10. Hasil Rekomendasi Tipe Diet Beserta Informasi Lainnya
 
 | id_diet | tipe_diet | tipe_masakan | resep_masakan | kadar_protein | kadar_karbo | kadar_lemak |
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| 3730 | paleo | american | Fluffy Paleo Cauliflower Mash | 16.37 | 41.77 | 25.39 |
-| 3921 | paleo | french | Healthy Chocolate Truffles Recipes | 19.39 | 113.88 | 103.46 |
-| 3925 | paleo | french | Dark & Stormy Date Caramels | 34.02 | 119.10 | 137.32 |
-| 3926 | paleo | french | Paleo Lemon Tarts | 38.77 | 126.10 | 64.78 |
-| 3927 | paleo | french | Healthy Coconut Meringue Parfait Recipes | 63.04 | 161.99 | 13.34 |
+| 2020 | keto | italian | Low Carb Pepperoni Pizza Meatballs | 146.41 | 34.31 | 207.44 |
+| 2021 | keto | italian | Keto Pizza | 28.10 | 24.98 | 20.21 |
+| 2022 | keto | Keto Gnocchi | 12.28 | 8.66 | 10.59 |
+| 2034 | keto | italian | Ez Keto Pizza | 127.50 | 25.61 | 213.62 |
+| 2364 | keto | south east asian | Keto Cheesy Shrimp Fritters | 96.15| 13.16 | 62.85 |
 
 ## Kelebihan dan Kekurangan Setiap Algoritma
 
@@ -820,4 +810,41 @@ Setelah mengimplementasikan kedua algoritma, baik *Content-based Filtering* dan 
 - Tidak dapat memberikan rekomendasi yang akurat jika data pengguna ke item masih sangat jarang. Sebab, cakupan informasi data masih belum terlalu cenderung pada salah satu sifat pengguna yang bersangkutan.
 - Terdapat masalah keamanan yang berkaiatn dengan data privasi pengguna. Dengan algoritma ini, peluang untuk terjadi kebocoran data privasi pengguna sangat besar dan memiliki risiko serangan profil palsu (*profile injection attacks*).
 
-Kesimpulan dari beberapa hal yang sudah disampaikan di atas, maka perlu keseimbangan serta kehati-hatian ketika menerapkan setiap algoritma-algoritma itu sesuai dengan kebutuhan dan kesiapan dalam mengantisipasi segala kekurangannya.
+Kesimpulan dari beberapa hal yang sudah disampaikan di atas, maka perlu menggunakan **kedua algoritam** di atas agar performa sistem dalam merekomendasikan dapat bekerja secara maksimal. Dengan begitu, ketika sistem masih baru, sistem akan menggunakan pendekatan *Content-based Filtering* dalam merekomendasikan item. Dan jika pengguna sudah mulai ramai, dapat dialihkan ke algoritma *Collaborative Filtering* dengan menggunakan data-data preferensi pengguna.
+
+# Evaluation
+
+Pada analisis ini, model dievaluasi menggunakan metrik evaluasi bernama *Mean Squared Error* (MSE). Metrik ini digunakan untuk menghitung jarak perbedaan antara nilai asli dengan nilai hasil prediksi. Nilai yang dijadikan acuan biasa disebut nilai *error*. Semakin kecil nilai *error* yang dihasilkan, maka semakin baik juga kemampuan model dalam memprediksi.Rumus dari MSE adalah sebagai berikut : 
+
+   MSE = $\frac{1}{n}\sum\limits_{i=1}^n (y_i - \hat{y}_i)^2$
+
+   Dengan penjelasan sebagai berikut:
+
+   $\frac{1}{n}\sum\limits_{i=1}^n$ : Pembagian angka 1 dengan jumlah observasi dalam dataset. Penjumlahan dilakukan secara iteratif dari angka 1.
+   
+   $\text{y}_i$ : nilai sebenarnya ke-${i}$
+   
+   $\hat{y}_i$ : nilai hasil prediksi ke-${i}$
+
+Metrik ini akan menghitung selisih antara nilai yang diprediksi oleh model dan nilai sebenarnya untuk diambil nilai *error*-nya. Setelah itu, nilai *error* akan dihilangkan efek postif dan negatifnya dengan cara dikuadratkan. Setelah dikuadratka, nilai *error* akan dijumlahkan dan dibagi dengan jumlah sampel yang akan menghasilkan nilai rata-rata dari *error* kuadrat. Hasil itu yang merupakan nilai *Mean Squared Error* atau MSE.
+
+Hasil penerapan metrik di atas, diperoleh nilai *error* sebesar **2.1528725624084473**. Hasil tersebut cukup kecil dan menandakan bahwa model dapat bekerja dengan baik dalam memprediksi data *rating* pengguna dengan preferensi tertentu pada setiap data yang belum pernah diambil atau dilakukan pemberian *rating* oleh pengguna tersebut. Untuk bentuk visualisasi hasil *training* dengan metrik evaluasi ditunjukkan pada **Gambar 16 dan 17**.
+
+**Gambar 16. Visualisasi Hasil *Loss***
+
+**Gambar 17. Visualisasi Hasil *Mean Squared Error* (MSE)**
+
+# Conclusion
+
+Dari hasil analisis ini, telah dibuat dua algoritma sistem rekomendasi yaitu *Content-based Filtering* dan *Collaborative Filtering*. Kedua algoritma itu merekomendasikan tipe diet beserta detail lainnya baik antar item dengan *Content-based Filtering* dan merekomendasikan tipe diet beserta detail lainnya berdasarkan preferensi pengguna yang serupa dengan *Collaborative Filtering*. 
+
+Pada algoritma *Content-based Filtering*, algoritma akan membandingkan kesamaan berdasarkan nilai *cosine similarity* setiap item tipe diet. Lalu, akan diambil nilai kesamaan paling tinggi untuk dijadikan rekomendasi. Sedangkan pada algoritma *Collaborative Filtering*, algoritma akan membandingkan kesamaan pola preferensi pengguna antar pengguna berdasarkan tipe diet yang ditandai dengan dominasi *rating* pengguna tertentu terhadap tipe diet tertentu.
+
+Model-model ini masih memerlukan improvisasi, seperti persebaran nilai *rating* di awal sebelum proses *training*. *Rating* masih berdasarkan penempatan acak dan belum benar-benar data nyata. Kedepannya, dapat dilakukan observasi secara langsung pada masyarakat yang membutuhkan diet dan resep-resepnya agar hasilnya lebih menggambarkan kondisi nyata.
+
+# References
+[1] Rando, Setiawan L.R, "Pemilihan Menu Makanan untuk Diet dengan Pendekatan Algoritma Genetika" *Jurnal Pendidikan Tambusai*, vol. 8, no. 1, 2024.
+
+[2] Pawening R.E, Puteri M.E, Jianika A.D, Hidayati F, "Deteksi Objek pada Citra Makanan Sebagai Rekomendasi Diet Menggunakan Metode Mask R-CNN" *Jurnal Ilmiah Teknik Informatika dan Komunikasi*, vol. 4, no. 1, 2024.
+
+[3] Theo Y, "Diet Sebagai Keseimbangan Hidup" *Jurnal Dekonstruksi*, vol. 9, no. 4, 2023.
